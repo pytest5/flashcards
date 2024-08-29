@@ -1,6 +1,16 @@
-const mongoose = require("mongoose");
+const { Schema, model } = require("mongoose");
 
-const userSchema = new mongoose.userSchema({ username: String });
-const User = mongoose.model("User", userSchema);
+const userSchema = new Schema({
+  username: String,
+  email: String,
+  hashedPassword: String,
+  isChild: Boolean,
+});
 
-module.exports = User;
+userSchema.set("toJSON", {
+  transform: (document, returnedObject) => {
+    delete returnedObject.hashedPassword;
+  },
+});
+
+module.exports = model("User", userSchema);
