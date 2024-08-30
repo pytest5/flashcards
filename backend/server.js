@@ -8,10 +8,14 @@ const cors = require("cors");
 
 const morgan = require("morgan");
 
+const usersRouter = require("./controllers/UsersController")
+
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cors());
 app.use(express.static("../frontend/dist")); // check again
+
+app.use("/api/users", usersRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
