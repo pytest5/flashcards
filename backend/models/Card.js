@@ -12,15 +12,9 @@ const cardSchema = new mongoose.Schema({
       (val) => val.length >= 2,
       "Uh oh, you need to have at least 2 distractors",
     ],
-    lowercase: true, // need this to compare against answer
   },
   answer: {
     type: String,
-    validate: [
-      (val) => this.distractors.includes(val),
-      "Uh oh, answer is not in your list of distractors",
-    ],
-    lowercase: true, // need this to compare against distractors
   },
   isChildFriendly: {
     type: Boolean,
