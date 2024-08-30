@@ -2,10 +2,10 @@ const express = require("express");
 const router = express.Router();
 const DecksController = require("../controllers/DecksController")
 
-// router.get("/", DecksControlles.index);
-// router.get("/:userId", DecksController.show);
+router.get("/", DecksController.index);
+router.get("/:deckId", DecksController.show);
 router.post("/", DecksController.create);
-// router.delete("/:userId", DecksController.destroy);
-// router.put("/:userId", DecksController.update);
+router.delete("/:deckId", DecksController.destroy);
+router.put("/:deckId", DecksController.update);
 
 module.exports = router;
