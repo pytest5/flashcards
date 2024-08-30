@@ -1,0 +1,17 @@
+meta {
+  name: Update-User
+  type: http
+  seq: 5
+}
+
+put {
+  url: http://localhost:3000/api/users/66d166cdeb42c2f59aaeb30d
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "userName": ""
+  }
+}
