@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const deckControllers = require("../controllers/DecksController")
+const DecksController = require("../controllers/DecksController")
 
-// router.get("/", deckControllers.index);
-// router.get("/:userId", deckControllers.show);
-router.post("/", deckControllers.create);
-// router.delete("/:userId", deckControllers.destroy);
-// router.put("/:userId", deckControllers.update);
+// router.get("/", DecksControlles.index);
+// router.get("/:userId", DecksController.show);
+router.post("/", DecksController.create);
+// router.delete("/:userId", DecksController.destroy);
+// router.put("/:userId", DecksController.update);
 
 module.exports = router;

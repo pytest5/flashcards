@@ -14,7 +14,6 @@ const deckSchema = new Schema({
   description: { type: String, trim: true },
   visibility: {
     enum: ["public", "private"],
-    default: "private",
     required: true,
   },
   isArchived: { type: Boolean, default: false },

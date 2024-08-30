@@ -73,34 +73,30 @@ const validateData = (data) => {
 };
 
 const create = async (req, res) => {
-  const notFilled = isFormFilled(req.body);
+  const data = req.body;
+  const notFilled = isFormFilled(data);
   if (notFilled) {
     return res.status(400).json(notFilled);
   }
 
-  const invalidData = validateData(req.body);
+  const invalidData = validateData(data);
   if (invalidData) {
     return res.status(400).json(invalidData);
   }
 
   try {
-    const userInDatabase = await User.findOne({ email: req.body.email });
+    const userInDatabase = await User.findOne({ email: data.email });
     if (userInDatabase) {
       return res
         .status(409)
         .json({ error: "You already have an existing account" });
     }
 
-    const [year, month, day] = req.body.dateOfBirth;
+    const [year, month, day] = data.dateOfBirth;
 
-    req.body.dateOfBirth = formatISO(new Date(year, month, day, 0, 0, 0));
+    data.dateOfBirth = formatISO(new Date(year, month, day, 0, 0, 0));
 
-    const user = await User.create({
-      userName: req.body.userName,
-      email: req.body.email,
-      hashedPassword: req.body.hashedPassword,
-      dateOfBirth: req.body.dateOfBirth,
-    });
+    const user = await User.create(data);
     res.status(200).json({ user });
   } catch (error) {
     res.status(500).json({ error: error.message });
