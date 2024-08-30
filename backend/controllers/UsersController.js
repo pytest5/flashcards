@@ -104,7 +104,7 @@ const create = async (req, res) => {
 };
 
 const index = async (req, res) => {
-  const { query } = req;  
+  const { query } = req;
   try {
     const users = await User.find(query);
     if (users.length === 0) {
@@ -118,6 +118,9 @@ const index = async (req, res) => {
 
 const show = async (req, res) => {
   const { userId } = req.params;
+  if (!userId) {
+    return res.status(400).json({ error: "Invalid request." });
+  }
   try {
     const user = await User.findById(userId);
     if (user === null) {
@@ -131,7 +134,10 @@ const show = async (req, res) => {
 
 const destroy = async (req, res) => {
   const { userId } = req.params;
-  console.log(userId)
+  if (!userId) {
+    return res.status(400).json({ error: "Invalid request." });
+  }
+  console.log(userId);
   try {
     await User.findByIdAndDelete(userId);
     res.status(204).send();
@@ -142,6 +148,9 @@ const destroy = async (req, res) => {
 
 const update = async (req, res) => {
   const { userId } = req.params;
+  if (!userId) {
+    return res.status(400).json({ error: "Invalid request." });
+  }
   const data = req.body;
   const invalidData = validateData(data);
   if (invalidData) {
