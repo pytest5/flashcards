@@ -150,7 +150,10 @@ const update = async (req, res) => {
     return res.status(400).json(invalidData);
   }
   try {
-    const user = await User.findByIdAndUpdate(userId, data, { new: true });
+    const user = await User.findByIdAndUpdate(userId, data, {
+      new: true,
+      runValidators: true,
+    });
     if (user === null) {
       return res.status(404).json({ error: "Resource not found" });
     }
