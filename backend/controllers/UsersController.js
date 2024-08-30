@@ -104,9 +104,10 @@ const create = async (req, res) => {
 };
 
 const index = async (req, res) => {
+  const { query } = req;  
   try {
-    const users = await User.find({});
-    if (users === null) {
+    const users = await User.find(query);
+    if (users.length === 0) {
       return res.status(404).json({ error: "Resource not found" });
     }
     res.status(200).json({ data: users });
@@ -130,6 +131,7 @@ const show = async (req, res) => {
 
 const destroy = async (req, res) => {
   const { userId } = req.params;
+  console.log(userId)
   try {
     await User.findByIdAndDelete(userId);
     res.status(204).send();

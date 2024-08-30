@@ -8,6 +8,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 const usersRouter = require("./routes/users");
+const decksRouter = require("./routes/decks.js")
 const cardsRouter = require("./routes/cards.js");
 
 app.use(morgan("dev"));
@@ -16,6 +17,7 @@ app.use(cors());
 app.use(express.static("../frontend/dist")); // check again
 
 app.use("/api/users", usersRouter);
+app.use("/api/decks", decksRouter);
 app.use("/api/cards", cardsRouter);
 
 app.get("/", (req, res) => {
