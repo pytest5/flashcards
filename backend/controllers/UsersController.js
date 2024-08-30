@@ -4,6 +4,22 @@ const { isEmail } = require("validator");
 // const { hashSync, compareSync } = require("bcrypt");
 // const { sign } = require("jsonwebtoken");
 
+// validation check for POST
+const isFormFilled = (data) => {
+  if (!data.userName) {
+    return { error: "A username is required" };
+  }
+  if (!data.email) {
+    return { error: "An email address is required." };
+  }
+  if (!data.hashedPassword) {
+    return { error: "A password is required." };
+  }
+  if (!data.dateOfBirth) {
+    return { error: "You date of birth is required." };
+  }
+};
+
 // shared validation checks for POST and PUT
 const validateData = (data) => {
   const passwordRegex = /^[A-Za-z\d]{3,}$/;
@@ -28,17 +44,22 @@ const validateData = (data) => {
 };
 
 const create = async (req, res) => {
+  const notFilled = isFormFilled(req.body);
+  if (notFilled) {
+    return res.status(400).json(notFilled);
+  }
+
+  const invalidData = validateData(req.body);
+  if (invalidData) {
+    return res.status(400).json(invalidData);
+  }
+
   try {
     const userInDatabase = await User.findOne({ email: req.body.email });
     if (userInDatabase) {
       return res
         .status(409)
         .json({ error: "You already have an existing account" });
-    }
-
-    const error = validateData(req.body);
-    if (error) {
-      return res.status(400).json(error);
     }
 
     const [year, month, day] = req.body.dateOfBirth;
