@@ -38,7 +38,6 @@ const show = async (req, res) => {
 
 const destroy = async (req, res) => {
   const { deckId } = req.params;
-  console.log(deckId);
   try {
     await Deck.findByIdAndDelete(deckId);
     res.status(204).send();
