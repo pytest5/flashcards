@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 const cardSchema = new mongoose.Schema({
   front: { type: String },
   frontImageUrl: {
@@ -9,7 +11,7 @@ const cardSchema = new mongoose.Schema({
   distractors: {
     type: Array,
     validate: [
-      (val) => val.length >= 2,
+      (val) => val === null || val.length >= 2,
       "Uh oh, you need to have at least 2 distractors",
     ],
   },
@@ -24,8 +26,8 @@ const cardSchema = new mongoose.Schema({
     type: Boolean,
     required: [true, "isMultipleChoice is required"],
   },
-  decks: [{ type: mongoose.ObjectId, ref: "Deck" }],
-  user: { type: mongoose.ObjectId, ref: "User" },
+  decks: [{ type: mongoose.Schema.Types.ObjectId, ref: "Deck" }],
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 
 const Card = mongoose.model("Card", cardSchema);

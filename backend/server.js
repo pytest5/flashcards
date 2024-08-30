@@ -5,10 +5,10 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const cors = require("cors");
-
 const morgan = require("morgan");
 
-const usersRouter = require("./controllers/UsersController")
+const usersRouter = require("./controllers/UsersController");
+const cardsRouter = require("./routes/cards.js");
 
 app.use(morgan("dev"));
 app.use(express.json());
@@ -16,6 +16,7 @@ app.use(cors());
 app.use(express.static("../frontend/dist")); // check again
 
 app.use("/api/users", usersRouter);
+app.use("/api/cards", cardsRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -24,7 +25,6 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
-
 
 main().catch((err) => console.log(err));
 
