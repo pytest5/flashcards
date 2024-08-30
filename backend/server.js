@@ -8,7 +8,7 @@ const cors = require("cors");
 
 const morgan = require("morgan");
 
-const usersRouter = require("./controllers/UsersController")
+const usersRouter = require("./routes/users");
 
 app.use(morgan("dev"));
 app.use(express.json());
