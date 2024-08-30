@@ -13,7 +13,7 @@ router.get("/:id");
 router.post("/");
 
 // delete card
-router.delete("/cards/:cardId");
+router.delete("/:cardId");
 
 // update card
 router.put("/:cardId");
