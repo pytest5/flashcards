@@ -137,7 +137,6 @@ const destroy = async (req, res) => {
   if (!userId) {
     return res.status(400).json({ error: "Invalid request." });
   }
-  console.log(userId);
   try {
     await User.findByIdAndDelete(userId);
     res.status(204).send();
