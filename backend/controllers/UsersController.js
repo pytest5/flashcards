@@ -1,5 +1,9 @@
 const User = require("../models/User");
-const { formatISO } = require("date-fns");
+const {
+  formatISO,
+  differenceInCalendarYears,
+  startOfToday,
+} = require("date-fns");
 const { isEmail } = require("validator");
 // const { hashSync, compareSync } = require("bcrypt");
 // const { sign } = require("jsonwebtoken");
@@ -23,6 +27,19 @@ const isFormFilled = (data) => {
 // shared validation checks for POST and PUT
 const validateData = (data) => {
   const passwordRegex = /^[A-Za-z\d]{3,}$/;
+  let age = -1;
+  if (data.dateOfBirth) {
+    age = differenceInCalendarYears(
+      startOfToday(),
+      formatISO(new Date(data.dateOfBirth[0], 0, 1, 0, 0, 0))
+    );
+  }
+
+  for (const key in data) {
+    if (!data[key]) {
+      return { error: `${key} is not a valid value.` };
+    }
+  }
 
   if (data.userName && data.userName.trim() === "") {
     return { error: "A username is required" };
@@ -40,6 +57,18 @@ const validateData = (data) => {
     return {
       error: "Please refer to minimum requirements for setting a password.",
     };
+  }
+  if (
+    data.dateOfBirth &&
+    (data.dateOfBirth.length !== 3 ||
+      data.dateOfBirth[1] < 0 ||
+      data.dateOfBirth[1] > 11 ||
+      data.dateOfBirth[2] < 1 ||
+      data.dateOfBirth[2] > 31 ||
+      age > 200 ||
+      age < 0)
+  ) {
+    return { error: "Please select a valid date of birth" };
   }
 };
 
@@ -113,10 +142,22 @@ const destroy = async (req, res) => {
   }
 };
 
-// router.put("/userId", async (req, res) => {
-//   const { userId } = req.params;
-//   const formData = req.body;
-//   validateData(formData);
-// });
+const update = async (req, res) => {
+  const { userId } = req.params;
+  const data = req.body;
+  const invalidData = validateData(data);
+  if (invalidData) {
+    return res.status(400).json(invalidData);
+  }
+  try {
+    const user = await User.findByIdAndUpdate(userId, data, { new: true });
+    if (user === null) {
+      return res.status(404).json({ error: "Resource not found" });
+    }
+    res.status(200).json({ data: user });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
-module.exports = { create, index, show, destroy };
+module.exports = { create, index, show, destroy, update };
