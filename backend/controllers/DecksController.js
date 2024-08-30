@@ -25,6 +25,9 @@ const index = async (req, res) => {
 
 const show = async (req, res) => {
   const { deckId } = req.params;
+  if (!deckId) {
+    return res.status(400).json({ error: "Invalid request." });
+  }
   try {
     const deck = await Deck.findById(deckId);
     if (deck === null) {
@@ -38,6 +41,9 @@ const show = async (req, res) => {
 
 const destroy = async (req, res) => {
   const { deckId } = req.params;
+  if (!deckId) {
+    return res.status(400).json({ error: "Invalid request." });
+  }
   try {
     await Deck.findByIdAndDelete(deckId);
     res.status(204).send();
@@ -47,24 +53,27 @@ const destroy = async (req, res) => {
 };
 
 const update = async (req, res) => {
-    const { deckId } = req.params;
-    const data = req.body;
-    // const invalidData = validateData(data);
-    // if (invalidData) {
-    //   return res.status(400).json(invalidData);
-    // }
-    try {
-      const deck = await Deck.findByIdAndUpdate(deckId, data, {
-        new: true,
-        runValidators: true,
-      });
-      if (deck === null) {
-        return res.status(404).json({ error: "Resource not found" });
-      }
-      res.status(200).json({ data: deck });
-    } catch (error) {
-      res.status(500).json({ error: error.message });
+  const { deckId } = req.params;
+  if (!deckId) {
+    return res.status(400).json({ error: "Invalid request." });
+  }
+  const data = req.body;
+  // const invalidData = validateData(data);
+  // if (invalidData) {
+  //   return res.status(400).json(invalidData);
+  // }
+  try {
+    const deck = await Deck.findByIdAndUpdate(deckId, data, {
+      new: true,
+      runValidators: true,
+    });
+    if (deck === null) {
+      return res.status(404).json({ error: "Resource not found" });
     }
-  };
+    res.status(200).json({ data: deck });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
 module.exports = { create, index, show, destroy, update };
