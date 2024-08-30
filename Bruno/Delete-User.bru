@@ -1,0 +1,17 @@
+meta {
+  name: Delete-User
+  type: http
+  seq: 7
+}
+
+put {
+  url: http://localhost:3000/api/users/66d166cdeb42c2f59aaeb30d
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "userName": ""
+  }
+}

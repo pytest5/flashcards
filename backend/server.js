@@ -7,7 +7,7 @@ const port = 3000;
 const cors = require("cors");
 const morgan = require("morgan");
 
-const usersRouter = require("./controllers/UsersController");
+const usersRouter = require("./routes/users");
 const cardsRouter = require("./routes/cards.js");
 
 app.use(morgan("dev"));
