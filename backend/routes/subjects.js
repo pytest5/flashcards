@@ -9,3 +9,8 @@ router.post("/");
 
 // delete subject (** DEV USE ONLY **)
 router.delete("/:subjectId");
+
+// update subject (** DEV USE ONLY **)
+router.put("/:subjectId");
+
+module.exports = router;
