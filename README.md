@@ -18,7 +18,7 @@ date-fns for converting a YYYY/MM/DD -> [YYYY, MM, DD] -> iso-8601 date in mongo
 Include deckId in req.body when creating a card. 
 
 ```yaml
-req.body:
+// req.body:
 {
   "front": "Car",
   "frontImageUrl": "https://fastly.picsum.photos/id/1016/200/300.jpg?hmac=9uxvjfyOlAv4nhGgmHDnUN3rkdGW1VumbY05RL2msEQ",
