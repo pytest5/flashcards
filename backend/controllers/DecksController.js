@@ -1,7 +1,73 @@
 const Deck = require("../models/Deck");
 
+// validation check for POST
+const isFormFilled = (data) => {
+  if (!data.deckName) {
+    return { error: "A deck name is required" };
+  }
+  if (!data.subject) {
+    return { error: "A subject type is required." };
+  }
+  if (!data.visibility) {
+    return { error: "Please set the deck's visibility in the form." };
+  }
+  if (!data.user) {
+    return { error: "Not authorized." };
+  }
+};
+
+// shared validation checks for POST and PUT
+const validateData = (data) => {
+  for (const key in data) {
+    if (!data[key]) {
+      if (key === "isArchived" && data[key] !== false) {
+        return { error: `${key} does not have a valid value.` };
+      }
+      if (key === "description") {
+        continue;
+      }
+      if (key !== "description" && key !== "isArchived") {
+        return { error: `${key} is not a valid value.` };
+      }
+    }
+  }
+
+  if (data.deckName && data.deckName.trim() === "") {
+    return { error: "A deck name is required" };
+  }
+  if (data.subject && data.subject.trim() === "") {
+    return { error: "A subject type is required." };
+  }
+  if (data.visibility && data.visibility.trim() === "") {
+    return { error: "Please set visibility for your deck." };
+  }
+  if (
+    data.visibility &&
+    data.visibility !== "public" &&
+    data.visibility !== "private"
+  ) {
+    return { error: "Invalid selection. Please set visibility for your deck." };
+  }
+  if (data.isArchived && data.isArchived !== true) {
+    return { error: "Invalid selection. Please archive the deck via settings" };
+  }
+  if (data.user && data.user.trim() === "") {
+    return { error: "Not authorized." };
+  }
+};
+
 const create = async (req, res) => {
   const data = req.body;
+  const notFilled = isFormFilled(data);
+  if (notFilled) {
+    return res.status(400).json(notFilled);
+  }
+
+  const invalidData = validateData(data);
+  if (invalidData) {
+    return res.status(400).json(invalidData);
+  }
+
   try {
     const deck = await Deck.create(data);
     res.status(201).json({ deck });
@@ -58,10 +124,10 @@ const update = async (req, res) => {
     return res.status(400).json({ error: "Invalid request." });
   }
   const data = req.body;
-  // const invalidData = validateData(data);
-  // if (invalidData) {
-  //   return res.status(400).json(invalidData);
-  // }
+  const invalidData = validateData(data);
+  if (invalidData) {
+    return res.status(400).json(invalidData);
+  }
   try {
     const deck = await Deck.findByIdAndUpdate(deckId, data, {
       new: true,

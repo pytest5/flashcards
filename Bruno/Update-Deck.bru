@@ -4,17 +4,18 @@ meta {
   seq: 11
 }
 
-post {
-  url: http://localhost:3000/api/decks
+put {
+  url: http://localhost:3000/api/decks/66d1e15cb385b860f0e1e8ef
   body: json
   auth: none
 }
 
 body:json {
   {
-    "deckName": "josh",
+    "deckName": "1",
+    "description": "whatever",
     "visibility": "public",
-    "isArchived": "false",
+    "isArchived": "test",
     "user": "66d17ae8e1a667e4592afeea"
   }
 }
