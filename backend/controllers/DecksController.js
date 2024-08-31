@@ -48,7 +48,7 @@ const validateData = (data) => {
   ) {
     return { error: "Invalid selection. Please set visibility for your deck." };
   }
-  if (data.isArchived && data.isArchived !== true) {
+  if (data.isArchived && typeof data.isArchived !== "boolean") {
     return { error: "Invalid selection. Please archive the deck via settings" };
   }
   if (data.user && data.user.trim() === "") {
