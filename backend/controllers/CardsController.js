@@ -8,7 +8,7 @@ async function getAllByCurrentUserId(req, res) {
   const currentUserId = "66d182fc334055eb1cde0581"; // add your own currentUserId
   if (!req.body) res.status(400).json({ error: "Invalid request body" });
   try {
-    const cards = await Card.find({ user: currentUserId });
+    const cards = await Card.find({ user: currentUserId }); // empty array will be returned so no error handling required
     res.status(200).json(cards);
   } catch (e) {
     console.error(e);
@@ -18,9 +18,10 @@ async function getAllByCurrentUserId(req, res) {
 
 async function getByCardId(req, res) {
   const cardId = req.params.cardId;
-  if (!cardId) res.status(400).json({ error: "Invalid card id" });
+  if (!cardId) res.status(400).json({ error: "Invalid card ID" });
   try {
     const card = await Card.findById(cardId);
+    if (!card) return res.status(404).json({ error: "Card not found" });
     res.status(200).json(card);
   } catch (e) {
     console.error(e);
@@ -30,10 +31,10 @@ async function getByCardId(req, res) {
 
 async function getAll(req, res) {
   const cardId = req.params.cardId;
-  if (!cardId) res.status(400).json({ error: "Invalid card id" });
+  if (!cardId) res.status(400).json({ error: "Invalid card ID" });
   try {
-    const card = await Card.find({});
-    res.status(200).json(card);
+    const cards = await Card.find({}); // empty array will be returned so no error handling required
+    res.status(200).json(cards);
   } catch (e) {
     console.error(e);
     res.status(500).json({ error: "Unable to retrieve cards" });
@@ -45,7 +46,12 @@ async function create(req, res) {
   if (!req.body) res.status(400).json({ error: "Invalid request body" });
   try {
     const card = await Card.create(req.body);
+    if (!card) return res.status(404).json({ error: "Error creating card" });
     const user = await User.findById(currentUserId);
+    if (!user)
+      return res
+        .status(404)
+        .json({ error: "Error retrieving current user for card creation" });
     // user.decks.push
     card.user = user;
     await card.save();
@@ -58,9 +64,14 @@ async function create(req, res) {
 
 async function destroy(req, res) {
   const cardId = req.params.cardId;
-  if (!cardId) res.status(400).json({ error: "Invalid card id" });
+  if (!cardId) res.status(400).json({ error: "Invalid card ID" });
   try {
-    await Card.findByIdAndDelete(cardId);
+    const card = await Card.findByIdAndDelete(cardId);
+    if (!card) {
+      return res.status(404).json({
+        error: "No card exists with the provided ID.",
+      });
+    }
     res.status(204).end();
   } catch (e) {
     console.error(e);
@@ -70,11 +81,14 @@ async function destroy(req, res) {
 
 async function update(req, res) {
   const cardId = req.params.cardId;
-  if (!cardId) res.status(400).json({ error: "Invalid card id" });
+  if (!cardId) res.status(400).json({ error: "Invalid card ID" });
   if (!req.body) res.status(400).json({ error: "Invalid request body" });
   try {
     const card = await Card.findByIdAndUpdate(cardId, req.body, { new: true });
-    console.log("hi");
+    if (!card)
+      return res
+        .status(404)
+        .json({ error: "No card exists with the provided ID" });
     res.status(201).json(card);
   } catch (e) {
     console.error(e);
