@@ -1,8 +1,6 @@
 const Card = require("../models/Card");
 const User = require("../models/User");
-// const Deck = require("../models/Deck");\
-
-// TODO: populate, push deck refs
+const Deck = require("../models/Deck");
 
 async function getAllByCurrentUserId(req, res) {
   const currentUserId = "66d182fc334055eb1cde0581"; // add your own currentUserId
@@ -42,18 +40,27 @@ async function getAll(req, res) {
 }
 
 async function create(req, res) {
-  const currentUserId = "66d182fc334055eb1cde0581"; // add your own currentUserId
+  const currentUserId = "66d182fc334055eb1cde0581"; // get currentUserId from token
   if (!req.body) res.status(400).json({ error: "Invalid request body" });
   try {
-    const card = await Card.create(req.body);
+    const { deckId, ...reqBody } = req.body;
+    const card = await Card.create(reqBody);
     if (!card) return res.status(404).json({ error: "Error creating card" });
+    // check if user exists
     const user = await User.findById(currentUserId);
     if (!user)
       return res
         .status(404)
         .json({ error: "Error retrieving current user for card creation" });
-    // user.decks.push
-    card.user = user;
+    // check if deck exists
+    const deck = await Deck.findById(deckId);
+    if (!deck)
+      return res.status(404).json({
+        error: "Deck not found. Cannot create card with a non existent deck",
+      });
+    // add refs
+    card.decks.push(deckId);
+    card.user = currentUserId;
     await card.save();
     res.status(201).json(card);
   } catch (e) {
