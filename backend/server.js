@@ -8,8 +8,9 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 const usersRouter = require("./routes/users");
-const decksRouter = require("./routes/decks.js")
+const decksRouter = require("./routes/decks.js");
 const cardsRouter = require("./routes/cards.js");
+const subjectsRouter = require("./routes/subjects.js");
 
 app.use(morgan("dev"));
 app.use(express.json());
@@ -19,6 +20,7 @@ app.use(express.static("../frontend/dist")); // check again
 app.use("/api/users", usersRouter);
 app.use("/api/decks", decksRouter);
 app.use("/api/cards", cardsRouter);
+app.use("/api/subjects", subjectsRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
