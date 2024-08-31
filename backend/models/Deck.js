@@ -6,11 +6,11 @@ const deckSchema = new Schema({
     required: [true, "deck name is required"],
     trim: true,
   },
-  //   subject: {
-  //     type: Schema.Types.ObjectId,
-  //     ref: "Subject",
-  //     required: [true, "subject is required"],
-  //   },
+  subject: {
+    type: Schema.Types.ObjectId,
+    ref: "Subject",
+    required: [true, "subject is required"],
+  },
   description: { type: String, trim: true },
   visibility: {
     type: String,
@@ -18,11 +18,11 @@ const deckSchema = new Schema({
     required: [true, "please set the deck's visibility"],
   },
   isArchived: { type: Boolean, default: false },
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: [true, "all decks must have a user"],
-    },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: [true, "all decks must have a user"],
+  },
 });
 
 module.exports = model("Deck", deckSchema);

@@ -5,16 +5,16 @@ meta {
 }
 
 post {
-  url: http://localhost:3000/api/users/
+  url: http://localhost:3000/api/decks
   body: json
   auth: none
 }
 
 body:json {
   {
-    "userName": "josh",
-    "email": "josh2@test.com",
-    "hashedPassword": "123",
-    "dateOfBirth": [1989, 0, 17]
+    "deckName": "test",
+    "subject": "66d2c86a403775b84b542cfe",
+    "visibility": "test",
+    "user": "66d17ae8e1a667e4592afeea"
   }
 }
