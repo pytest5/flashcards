@@ -17,6 +17,8 @@ async function create(req, res) {
   if (!req.body) res.status(400).json({ error: "Invalid request body" });
   try {
     const subject = await Subject.create(req.body);
+    if (!subject)
+      return res.status(404).json({ error: "Unable to create subject" });
     res.status(201).json(subject);
   } catch (e) {
     console.error(e);
@@ -29,7 +31,11 @@ async function destroy(req, res) {
   const { subjectId } = req.params;
   if (!subjectId) res.status(400).json({ error: "Invalid subject id" });
   try {
-    await Subject.findByIdAndDelete(subjectId);
+    const subject = await Subject.findByIdAndDelete(subjectId);
+    if (!subject)
+      return res
+        .status(404)
+        .json({ error: "Unable to find subject with the provided ID" });
     res.status(204).end();
   } catch (e) {
     console.error(e);
@@ -47,7 +53,9 @@ async function update(req, res) {
       new: true,
     });
     if (!subject)
-      return res.status(404).json({ error: "Unable to find subject" });
+      return res
+        .status(404)
+        .json({ error: "Unable to find subject with the provided ID" });
     res.status(201).json(subject);
   } catch (e) {
     console.error(e);
