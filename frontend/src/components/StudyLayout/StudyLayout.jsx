@@ -1,5 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import StudyNavBar from "./StudyNavBar/StudyNavBar";
 
 export default function StudyPage() {
   const [step, setStep] = React.useState(0);
@@ -17,9 +18,9 @@ export default function StudyPage() {
   }
 
   return (
-    <>
-      <h1>Study Page</h1>
+    <div>
+      <StudyNavBar />
       <Outlet context={{ step, answer, distractors, handleAddStep }} />
-    </>
+    </div>
   );
 }
