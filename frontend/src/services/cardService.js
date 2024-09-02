@@ -13,3 +13,5 @@ async function getCards() {
     console.error(error.message);
   }
 }
+
+<input type="date"></input>;
