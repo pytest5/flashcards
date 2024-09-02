@@ -2,14 +2,13 @@ import React from "react";
 import { getAudioUrl } from "../../services/textToSpeechService";
 import McqKidsCardOption from "../McqKidsCardOption/McqKidsCardOption";
 import { useOutletContext } from "react-router-dom";
+import { GridList, GridListItem, Button } from "react-aria-components";
 
 export default function McqKidsCard() {
   const [src, setSrc] = React.useState("");
   const [isInitialStep, setIsInitialStep] = React.useState(true);
   const audioRef = React.useRef();
   const { step, answer, distractors, handleAddStep } = useOutletContext();
-
-  console.log("hi", distractors);
 
   React.useEffect(() => {
     async function initializeAudio() {
@@ -26,27 +25,24 @@ export default function McqKidsCard() {
 
   return (
     <>
-      <ul>
+      <GridList aria-label="mcq kids card options" selectionMode="multiple">
         {distractors.map((i, idx) => (
-          <McqKidsCardOption
-            key={`${i}-${step}-${isInitialStep}`}
-            answer={answer}
-            idx={idx}
-            step={step}
-          >
-            {i}
-          </McqKidsCardOption>
+          <GridListItem key={`${i}-${step}-${isInitialStep}`}>
+            <McqKidsCardOption answer={answer} idx={idx} step={step}>
+              {i}
+            </McqKidsCardOption>
+          </GridListItem>
         ))}
-      </ul>
+      </GridList>
       <audio src={src} ref={audioRef} autoPlay={true} />
       {isInitialStep ? (
-        <button onClick={handlePlay} style={{ width: "110px" }}>
+        <Button onPress={handlePlay} style={{ width: "110px" }}>
           Start
-        </button>
+        </Button>
       ) : (
-        <button onClick={handleAddStep} style={{ width: "110px" }}>
+        <Button onPress={handleAddStep} style={{ width: "110px" }}>
           Continue
-        </button>
+        </Button>
       )}
     </>
   );

@@ -31,6 +31,10 @@ ol[role="list"] {
   list-style: none;
 }
 
+ul {
+  padding: 0px;
+}
+
 body {
   min-height: 100vh;
   line-height: 1.5;
