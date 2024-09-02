@@ -2,7 +2,6 @@ const Subject = require("../models/Subject");
 
 // get all Subjects
 async function getAll(req, res) {
-  if (!req.body) res.status(400).json({ error: "Invalid request body" });
   try {
     const subjects = await Subject.find({});
     res.status(200).json(subjects);

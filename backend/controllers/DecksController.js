@@ -62,15 +62,13 @@ const create = async (req, res) => {
   if (notFilled) {
     return res.status(400).json(notFilled);
   }
-
   const invalidData = validateData(data);
   if (invalidData) {
     return res.status(400).json(invalidData);
   }
-
   try {
     const deck = await Deck.create(data);
-    res.status(201).json({ deck });
+    res.status(201).json(deck);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -112,7 +110,7 @@ const destroy = async (req, res) => {
   }
   try {
     await Deck.findByIdAndDelete(deckId);
-    res.status(204).send();
+    res.status(204).end();
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -131,12 +129,12 @@ const update = async (req, res) => {
   try {
     const deck = await Deck.findByIdAndUpdate(deckId, data, {
       new: true,
-      runValidators: true,
+      runValidators: true, // enforces users to only use enum values when updating
     });
     if (deck === null) {
       return res.status(404).json({ error: "Resource not found" });
     }
-    res.status(200).json({ data: deck });
+    res.status(200).json(deck);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

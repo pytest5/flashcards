@@ -3,8 +3,7 @@ const User = require("../models/User");
 const Deck = require("../models/Deck");
 
 async function getAllByCurrentUserId(req, res) {
-  const currentUserId = "66d182fc334055eb1cde0581"; // add your own currentUserId
-  if (!req.body) res.status(400).json({ error: "Invalid request body" });
+  const currentUserId = "66d182fc334055eb1cde0581"; // add your own currentUserId req.userId
   try {
     const cards = await Card.find({ user: currentUserId }); // empty array will be returned so no error handling required
     res.status(200).json(cards);
@@ -70,7 +69,7 @@ async function create(req, res) {
 }
 
 async function destroy(req, res) {
-  const cardId = req.params.cardId;
+  const { cardId } = req.params;
   if (!cardId) res.status(400).json({ error: "Invalid card ID" });
   try {
     const card = await Card.findByIdAndDelete(cardId);
