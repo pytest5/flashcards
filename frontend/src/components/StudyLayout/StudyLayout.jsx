@@ -1,7 +1,8 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import StudyNavBar from "./StudyNavBar/StudyNavBar";
 
-export default function StudyPage() {
+export default function StudyLayout() {
   const [step, setStep] = React.useState(0);
   const mockData = [
     { answer: "花", distractors: ["花", "草", "树"] },
@@ -17,9 +18,9 @@ export default function StudyPage() {
   }
 
   return (
-    <>
-      <h1>Study Page</h1>
+    <div>
+      <StudyNavBar />
       <Outlet context={{ step, answer, distractors, handleAddStep }} />
-    </>
+    </div>
   );
 }

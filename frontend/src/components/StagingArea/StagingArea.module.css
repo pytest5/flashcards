@@ -1,0 +1,41 @@
+.wrapper {
+  display: grid;
+  grid-template-rows: auto auto auto 1fr;
+  gap: 15px;
+  --border-radius: 8px;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  overflow: auto;
+  gap: 15px;
+}
+
+.rowBox {
+  display: flex;
+  min-width: min-content;
+  border: 1px solid white;
+  border-radius: var(--border-radius);
+}
+
+.bigCard {
+  height: 200px;
+  width: 350px;
+  display: grid;
+  place-content: center;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.smallCard {
+  border: 1px solid white;
+  border-radius: var(--border-radius);
+  padding: 15px;
+}
+
+.deckInfo {
+  text-align: start;
+}

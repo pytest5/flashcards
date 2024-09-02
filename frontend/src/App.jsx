@@ -6,13 +6,13 @@ import CreateDeckPage from "./pages/CreateDeckPage";
 import CreateCardsPage from "./pages/CreateDeckPage";
 import DashBoard from "./components/DashBoard";
 import EditDeckForm from "./components/EditDeckForm";
-import StudyPage from "./pages/StudyPage";
+import StudyLayout from "./components/StudyLayout";
 import Summary from "./components/Summary";
 import FrontBackCard from "./components/FrontBackCard";
 import McqCard from "./components/McqCard";
 import McqKidsCard from "./components/McqKidsCard/McqKidsCard";
 import LoginPage from "./pages/LoginPage";
-import StagingArea from "./components/StagingArea";
+import StagingArea from "./components/StagingArea/StagingArea";
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
         <Route path="dashboard" element={<DashBoard />} />
       </Route>
       <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/decks/:deckId/session" element={<StudyPage />}>
+      <Route path="/decks/:deckId/session" element={<StudyLayout />}>
         <Route index element={<StagingArea />} />
         <Route path="front-back" element={<FrontBackCard />} />
         <Route path="mcq" element={<McqCard />} />
