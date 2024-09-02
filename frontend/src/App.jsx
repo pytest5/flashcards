@@ -6,7 +6,7 @@ import CreateDeckPage from "./pages/CreateDeckPage";
 import CreateCardsPage from "./pages/CreateDeckPage";
 import DashBoard from "./components/DashBoard";
 import EditDeckForm from "./components/EditDeckForm";
-import StudyLayout from "./components/StudyLayout";
+import StudyLayout from "./components/StudyLayout/StudyLayout";
 import Summary from "./components/Summary";
 import FrontBackCard from "./components/FrontBackCard";
 import McqCard from "./components/McqCard";

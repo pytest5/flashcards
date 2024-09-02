@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import StudyNavBar from "./StudyNavBar/StudyNavBar";
+import StudyNavBar from "../StudyNavBar/StudyNavBar";
 
 export default function StudyLayout() {
   const [step, setStep] = React.useState(0);
