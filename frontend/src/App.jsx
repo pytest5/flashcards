@@ -10,9 +10,9 @@ import StudyPage from "./pages/StudyPage";
 import Summary from "./components/Summary";
 import FrontBackCard from "./components/FrontBackCard";
 import McqCard from "./components/McqCard";
-import McqKidsCard from "./components/McqKidsCard";
+import McqKidsCard from "./components/McqKidsCard/McqKidsCard";
 import LoginPage from "./pages/LoginPage";
-import StagingPage from "./pages/StagingPage";
+import StagingArea from "./components/StagingArea";
 
 function App() {
   return (
@@ -23,11 +23,11 @@ function App() {
         <Route path="dashboard" element={<DashBoard />} />
       </Route>
       <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/decks/:deckId/staging" element={<StagingPage />} />
       <Route path="/decks/:deckId/session" element={<StudyPage />}>
-        <Route path="front-back" element={<FrontBackCard />} /> {/* here */}
+        <Route index element={<StagingArea />} />
+        <Route path="front-back" element={<FrontBackCard />} />
         <Route path="mcq" element={<McqCard />} />
-        <Route path="mcq-kids" element={<McqKidsCard />} /> {/* zac */}
+        <Route path="mcq-kids" element={<McqKidsCard />} />
         <Route path="summary" element={<Summary />} />
       </Route>
       <Route path="/decks/new" element={<CreateDeckPage />} />
@@ -36,17 +36,5 @@ function App() {
     </Routes>
   );
 }
-
-/*  <Routes>
-      <Route element={<HomeLayout />}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-      </Route>
-
-      <Route path="/dashboard" element={<ProtectedLayout />}>
-        <Route path="profile" element={<ProfilePage />} />
-        <Route path="settings" element={<SettingsPage />} />
-      </Route>
-    </Routes> */
 
 export default App;
