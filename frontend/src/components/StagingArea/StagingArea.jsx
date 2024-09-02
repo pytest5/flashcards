@@ -3,6 +3,8 @@ import { ListBox, ListBoxItem } from "react-aria-components";
 import styles from "./StagingArea.module.css";
 import { FaRegCirclePlay } from "react-icons/fa6";
 import PlayButtonIcon from "../PlayButtonIcon/PlayButtonIcon";
+import { HiOutlineSpeakerWave } from "react-icons/hi2";
+import { FaRegStar } from "react-icons/fa";
 
 const mockDecks = [
   { id: 1, answer: "花", audioSrc: "www.test.com" },
@@ -23,8 +25,7 @@ export default function StagingArea() {
       <PlayButtonIcon />
       <section className={styles.deckInfo}>
         <h2>Deck name</h2>
-        <span>UserAvatar </span>
-        <span>2 terms</span>
+        <span>3 terms</span>
         <div>deck description</div>
       </section>
       <ListBox
@@ -33,7 +34,10 @@ export default function StagingArea() {
       >
         {(item) => (
           <ListBoxItem key={item.id} className={styles.columnBox}>
-            <div className={styles.smallCard}>{item.answer}</div>
+            <div className={styles.smallCard}>
+              <span className={styles.smallCardAnswer}>{item.answer}</span>{" "}
+              <HiOutlineSpeakerWave /> <FaRegStar />
+            </div>
           </ListBoxItem>
         )}
       </ListBox>
