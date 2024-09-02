@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import StudyNavBar from "./StudyNavBar/StudyNavBar";
+import StudyNavBar from "../StudyNavBar/StudyNavBar";
+import styles from "./StudyLayout.module.css";
 
 export default function StudyLayout() {
   const [step, setStep] = React.useState(0);
@@ -18,7 +19,7 @@ export default function StudyLayout() {
   }
 
   return (
-    <div>
+    <div className={styles.studyLayoutWrapper}>
       <StudyNavBar />
       <Outlet context={{ step, answer, distractors, handleAddStep }} />
     </div>

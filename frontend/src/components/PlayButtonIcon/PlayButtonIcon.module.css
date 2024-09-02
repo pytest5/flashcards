@@ -1,0 +1,4 @@
+.playButtonWrapper {
+  display: grid;
+  place-content: center;
+}
