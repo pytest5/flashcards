@@ -2,6 +2,7 @@ import React from "react";
 import { ListBox, ListBoxItem } from "react-aria-components";
 import styles from "./StagingArea.module.css";
 import { FaRegCirclePlay } from "react-icons/fa6";
+import PlayButtonIcon from "../PlayButtonIcon/PlayButtonIcon";
 
 const mockDecks = [
   { id: 1, answer: "花", audioSrc: "www.test.com" },
@@ -11,7 +12,7 @@ const mockDecks = [
 
 export default function StagingArea() {
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.stagingAreaWrapper}>
       <ListBox items={mockDecks} className={styles.container}>
         {(item) => (
           <ListBoxItem key={item.id} className={styles.rowBox}>
@@ -19,7 +20,7 @@ export default function StagingArea() {
           </ListBoxItem>
         )}
       </ListBox>
-      <FaRegCirclePlay size={32} />
+      <PlayButtonIcon />
       <section className={styles.deckInfo}>
         <h2>Deck name</h2>
         <span>UserAvatar </span>

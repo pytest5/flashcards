@@ -1,9 +1,8 @@
-.wrapper {
+.stagingAreaWrapper {
   display: grid;
   grid-template-rows: auto auto auto 1fr;
   gap: 15px;
   --border-radius: 8px;
-  height: 100%;
 }
 
 .container {
