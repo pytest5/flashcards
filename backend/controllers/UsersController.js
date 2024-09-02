@@ -2,7 +2,7 @@ const User = require("../models/User");
 const {
   formatISO,
   differenceInCalendarYears,
-  startOfToday,
+  startOfToday, // prevents user from submitting a DOB thats in the future / too far in the past
 } = require("date-fns");
 const { isEmail } = require("validator");
 // const { hashSync, compareSync } = require("bcrypt");
@@ -26,12 +26,12 @@ const isFormFilled = (data) => {
 
 // shared validation checks for POST and PUT
 const validateData = (data) => {
-  const passwordRegex = /^[A-Za-z\d]{3,}$/;
+  const passwordRegex = /^[A-Za-z\d]{3,}$/; // checks if alpha numeric and minlength 3
   let age = -1;
   if (data.dateOfBirth) {
     age = differenceInCalendarYears(
       startOfToday(),
-      formatISO(new Date(data.dateOfBirth[0], 0, 1, 0, 0, 0))
+      formatISO(new Date(data.dateOfBirth[0], 0, 1, 0, 0, 0)) // redo when using datepicker
     );
   }
 
@@ -97,7 +97,7 @@ const create = async (req, res) => {
     data.dateOfBirth = formatISO(new Date(year, month, day, 0, 0, 0));
 
     const user = await User.create(data);
-    res.status(200).json({ user });
+    res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -107,16 +107,17 @@ const index = async (req, res) => {
   const { query } = req;
   try {
     const users = await User.find(query);
-    if (users.length === 0) {
-      return res.status(404).json({ error: "Resource not found" });
-    }
-    res.status(200).json({ data: users });
+    // if (users.length === 0) {
+    // return res.status(404).json({ error: "Resource not found" });
+    // }
+    res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
 const show = async (req, res) => {
+  // find by userId
   const { userId } = req.params;
   if (!userId) {
     return res.status(400).json({ error: "Invalid request." });
@@ -126,7 +127,7 @@ const show = async (req, res) => {
     if (user === null) {
       return res.status(404).json({ error: "Resource not found" });
     }
-    res.status(200).json({ data: user });
+    res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -163,7 +164,7 @@ const update = async (req, res) => {
     if (user === null) {
       return res.status(404).json({ error: "Resource not found" });
     }
-    res.status(200).json({ data: user });
+    res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
