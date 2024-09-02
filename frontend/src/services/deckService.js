@@ -101,3 +101,22 @@ export const deleteDeck = async (userId) => {
     console.error(error.message);
   }
 };
+
+export const editDeck = async (userId, formData) => {
+    const payload = formData;
+  try {
+    const response = await fetch(`${BASE_URL}/${userId}`, {
+      method: "PUT",
+      body: JSON.stringify(payload),
+      headers: HEADERS,
+    });
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.error(error.message);
+  }
+};
