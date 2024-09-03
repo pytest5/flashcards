@@ -7,22 +7,22 @@ import CreateCardsPage from "./pages/CreateDeckPage";
 import DashBoard from "./components/DashBoard";
 import EditDeckForm from "./components/EditDeckForm";
 import StudyLayout from "./components/StudyLayout/StudyLayout";
-import Summary from "./components/Summary";
+import Summary from "./components/Summary/Summary";
 import FrontBackCard from "./components/FrontBackCard";
 import McqCard from "./components/McqCard";
 import McqKidsCard from "./components/McqKidsCard/McqKidsCard";
 import LoginPage from "./pages/LoginPage";
 import StagingArea from "./components/StagingArea/StagingArea";
 import SignUpPage from "./pages/SignUpPage";
-import JoshStagingArea from "./components/Temp/JoshStaging"
+import JoshStagingArea from "./components/Temp/JoshStaging";
 
 const mockUser = {
-  "_id": "66d17ae8e1a667e4592afeea",
-  "userName": "test",
-  "email": "josh1@test.com",
-  "role": "user",
-  "__v": 0
-}
+  _id: "66d17ae8e1a667e4592afeea",
+  userName: "test",
+  email: "josh1@test.com",
+  role: "user",
+  __v: 0,
+};
 
 function App() {
   return (
