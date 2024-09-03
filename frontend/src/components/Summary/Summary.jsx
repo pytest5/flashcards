@@ -1,9 +1,11 @@
 import React from "react";
-import { useOutletContext } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import styles from "./Summary.module.css";
+import { Button } from "react-aria-components";
 
 export default function Summary() {
   const { score } = useOutletContext();
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -12,8 +14,12 @@ export default function Summary() {
       <span>Correct: </span> <span>{score.correct}</span>
       <span>Wrong: </span> <span>{score.wrong}</span>
       <div className={styles.actions}>
-        <button>Back to home</button>
-        <button>Try again</button>
+        <Link to="/home">
+          <Button>Back to home</Button>
+        </Link>
+        <Link to="../">
+          <Button>Try again</Button>
+        </Link>
       </div>
     </div>
   );
