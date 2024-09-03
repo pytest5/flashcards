@@ -8,7 +8,7 @@ export default function McqKidsCardOption({
   children,
   step,
   length,
-  disabledTracker,
+  resultTracker,
   evaluateChoice,
 }) {
   const [isCorrect, setIsCorrect] = React.useState(null);
@@ -22,9 +22,9 @@ export default function McqKidsCardOption({
   }
 
   const handleClick = (children) => () => {
-    const checkAnswer = answer === children;
-    setIsCorrect(checkAnswer);
-    tallyScore(isCorrect);
+    tallyScore(answer === children);
+    const isAnswerCorrect = answer === children;
+    setIsCorrect(isAnswerCorrect);
     navToSummaryIfDone(step, length);
     evaluateChoice(children);
   };
@@ -32,7 +32,7 @@ export default function McqKidsCardOption({
   return (
     <div
       onClick={handleClick(children)}
-      className={`${styles.mcqOptionWrapper} ${disabledTracker[children] === "disabled" && styles.disabled} ${disabledTracker[children] === "answer" && styles.answer} ${disabledTracker[children] === "wrong" && styles.wrong}`}
+      className={`${styles.mcqOptionWrapper} ${resultTracker[children] === "disabled" && styles.disabled} ${resultTracker[children] === "answer" && styles.answer} ${resultTracker[children] === "wrong" && styles.wrong}`}
       key={step}
     >
       <FlashCardOptionIcon word={children} isCorrect={isCorrect} />

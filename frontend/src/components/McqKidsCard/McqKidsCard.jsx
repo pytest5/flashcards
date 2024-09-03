@@ -8,9 +8,9 @@ import styles from "./McqKidsCard.module.css";
 export default function McqKidsCard() {
   const [src, setSrc] = React.useState("");
   const [isInitialStep] = React.useState(true);
-  const { step, answer, distractors, handleAddStep } = useOutletContext();
-  const [disabledTracker, setDisabledTracker] = React.useState(() =>
-    makeDisabledTracker()
+  const { step, answer, options, handleAddStep } = useOutletContext();
+  const [resultTracker, setResultTracker] = React.useState(() =>
+    makeResultTracker()
   );
   const audioRef = React.useRef();
 
@@ -22,18 +22,17 @@ export default function McqKidsCard() {
     initializeAudio();
   }, [answer]);
 
-  // function handlePlay() {
-  //   audioRef.current.play();
-  //   setIsInitialStep(false);
-  // }
+  function makeResultTracker() {
+    return options.reduce((a, c) => ({ ...a, [c]: false }), {});
+  }
 
-  function makeDisabledTracker() {
-    const trackerObj = distractors.reduce((a, c) => ({ ...a, [c]: false }), {});
-    return trackerObj;
+  function resetResultTracker() {
+    setResultTracker(makeResultTracker());
   }
 
   function evaluateChoice(word) {
-    function updateDisabledTracker(word) {
+    // reduce this maybe..
+    function updateResultTracker(word) {
       const newTracker = {};
       function evaluate(key, word, answer) {
         if (key === answer) return (newTracker[key] = "answer");
@@ -43,37 +42,30 @@ export default function McqKidsCard() {
           return (newTracker[key] = "disabled");
         }
       }
-      Object.keys(disabledTracker).forEach((key) =>
-        evaluate(key, word, answer)
-      );
+      Object.keys(resultTracker).forEach((key) => evaluate(key, word, answer));
       return newTracker;
     }
-    const newTracker = updateDisabledTracker(word);
-    setDisabledTracker(newTracker);
-  }
-
-  function resetDisabledTracker() {
-    const trackerObj = distractors.reduce((a, c) => ({ ...a, [c]: false }), {});
-    setDisabledTracker(trackerObj);
+    const newTracker = updateResultTracker(word);
+    setResultTracker(newTracker);
   }
 
   function handleClickContinue() {
     handleAddStep();
-    resetDisabledTracker();
+    resetResultTracker();
   }
 
   return (
     <div className={styles.mcqWrapper}>
       <ListBox className={styles.mcqContainer}>
-        {distractors.map((i, idx) => (
+        {options.map((i, idx) => (
           <ListBoxItem id={i} key={`${i}-${step}-${isInitialStep}`}>
             <McqKidsCardOption
               answer={answer}
               idx={idx}
               step={step}
-              length={distractors.length}
+              length={options.length}
               key={`${i}-${step}-${isInitialStep}`}
-              disabledTracker={disabledTracker}
+              resultTracker={resultTracker}
               evaluateChoice={evaluateChoice}
             >
               {i}

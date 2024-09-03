@@ -7,18 +7,25 @@ export default function StudyLayout() {
   const [step, setStep] = React.useState(0);
   const [score, setScore] = React.useState({ correct: 0, wrong: 0 });
 
-  const mockData = [
-    { answer: "花", distractors: ["花", "草", "树"] },
-    { answer: "草", distractors: ["花", "草", "树"] },
-    { answer: "树", distractors: ["花", "草", "树"] },
+  const realData = [
+    { answer: "花", distractors: ["草", "树"] },
+    { answer: "草", distractors: ["花", "树"] },
+    { answer: "树", distractors: ["花", "草"] },
   ];
 
-  const answer = mockData[step].answer;
-  const distractors = mockData[step].distractors;
-  const length = mockData.length;
+  const sessionData = realData.map((i) => ({
+    ...i,
+    options: [...i.distractors, i.answer],
+    isCorrect: null,
+    isGuessed: false,
+  }));
+
+  const answer = sessionData[step].answer;
+  const options = sessionData[step].options;
+  const length = sessionData.length;
 
   function handleAddStep() {
-    if (step === mockData.length - 1) return;
+    if (step === length - 1) return;
     setStep(step + 1);
   }
 
@@ -39,7 +46,7 @@ export default function StudyLayout() {
         context={{
           step,
           answer,
-          distractors,
+          options,
           handleAddStep,
           score,
           tallyScore,
