@@ -32,8 +32,6 @@ export default function StudyLayout() {
     setScore({ correct: 0, wrong: 0 });
   }
 
-  console.log("score: ", score);
-
   return (
     <div className={styles.studyLayoutWrapper}>
       <StudyNavBar step={step} length={length} resetProgress={resetProgress} />
