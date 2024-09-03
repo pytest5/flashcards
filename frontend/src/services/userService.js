@@ -3,6 +3,7 @@ const BASE_URL = "/api/users";
 const HEADERS = {
   "Content-Type": "application/json",
   // Authorization: `Bearer ${import.meta.env.VITE_BACKEND_HEADER_AUTH}`,
+  Authorization: `Bearer ${JSON.parse(localStorage.getItem("jwt"))}`,
 };
 
 export const getUserById = async (userId) => {
@@ -33,7 +34,6 @@ export const createUser = async (formData) => {
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
-
     const json = await response.json();
     return { id: json._id, username: json.userName };
   } catch (error) {
@@ -50,7 +50,6 @@ export const deleteUser = async (userId) => {
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
-
     const json = await response.json();
     return json;
   } catch (error) {
@@ -68,9 +67,9 @@ export const login = async (data) => {
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
-
-    const json = await response.json();
-    return json;
+    const token = await response.json();
+    localStorage.setItem("jwt", JSON.stringify(token));
+    return token;
   } catch (error) {
     console.error(error.message);
   }

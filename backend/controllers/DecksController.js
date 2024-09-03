@@ -1,4 +1,5 @@
 const Deck = require("../models/Deck");
+const User = require("../models/User");
 
 // validation check for POST
 const isFormFilled = (data) => {
@@ -55,6 +56,18 @@ const validateData = (data) => {
     return { error: "Not authorized." };
   }
 };
+
+async function getCurrentUserDecks(req, res) {
+  try {
+    const decks = await Deck.find({ user: req.user.id });
+    res.json(decks);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({
+      error: `An error occurred while finding decks for user ID: ${req.user.id}`,
+    });
+  }
+}
 
 const create = async (req, res) => {
   const data = req.body;
@@ -140,4 +153,4 @@ const update = async (req, res) => {
   }
 };
 
-module.exports = { create, index, show, destroy, update };
+module.exports = { getCurrentUserDecks, create, index, show, destroy, update };

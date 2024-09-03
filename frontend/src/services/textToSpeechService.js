@@ -1,6 +1,6 @@
 export async function getAudioUrl(text, voiceType = "A") {
   // voiceType => A (CN female 1), C (CN male), D (CN female 2)
-  console.log("getting audio url");
+
   const introText = "哪一个是...";
   const BASE_URL = "https://texttospeech.googleapis.com/v1/text:synthesize";
   const body = {

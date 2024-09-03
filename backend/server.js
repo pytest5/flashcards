@@ -6,6 +6,7 @@ const app = express();
 const port = 3000;
 const cors = require("cors");
 const morgan = require("morgan");
+const { verifyToken } = require("./middleware/verify-token.js");
 
 const usersRouter = require("./routes/users");
 const decksRouter = require("./routes/decks.js");
@@ -18,9 +19,9 @@ app.use(cors());
 app.use(express.static("../frontend/dist")); // check again
 
 app.use("/api/users", usersRouter);
-app.use("/api/decks", decksRouter);
-app.use("/api/cards", cardsRouter);
-app.use("/api/subjects", subjectsRouter);
+app.use("/api/decks", verifyToken, decksRouter);
+app.use("/api/cards", verifyToken, cardsRouter);
+app.use("/api/subjects", verifyToken, subjectsRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

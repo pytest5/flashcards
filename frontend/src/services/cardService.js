@@ -3,6 +3,7 @@ const BASE_URL = "/api/cards";
 const HEADERS = {
   "Content-Type": "application/json",
   // Authorization: `Bearer ${import.meta.env.VITE_BACKEND_HEADER_AUTH}`,
+  Authorization: `Bearer ${JSON.parse(localStorage.getItem("jwt"))}`,
 };
 
 async function getCards() {

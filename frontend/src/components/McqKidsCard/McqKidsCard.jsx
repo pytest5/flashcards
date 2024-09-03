@@ -46,7 +46,6 @@ export default function McqKidsCard() {
       Object.keys(disabledTracker).forEach((key) =>
         evaluate(key, word, answer)
       );
-      console.log("HEY", newTracker);
       return newTracker;
     }
     const newTracker = updateDisabledTracker(word);

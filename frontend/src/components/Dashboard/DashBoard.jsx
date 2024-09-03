@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getDecksByUserId } from "../../services/deckService";
+import { getCurrentUserDecks } from "../../services/deckService";
 import { GridList, GridListItem, Button } from "react-aria-components";
 // import "./Dashboard.module.css";
 import { Link } from "react-router-dom";
@@ -9,12 +9,12 @@ export default function Dashboard() {
 
   useEffect(() => {
     const onLoad = async () => {
-      const userDecks = await getDecksByUserId("66d17ae8e1a667e4592afeea");
-      console.log(userDecks);
+      const userDecks = await getCurrentUserDecks();
       setDecks(userDecks);
     };
     onLoad();
   }, []);
+
   return (
     <>
       <h2>Your Decks</h2>

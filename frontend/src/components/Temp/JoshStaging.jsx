@@ -35,6 +35,7 @@ export default function JoshStagingArea() {
     <>
       <div className={styles.stagingAreaWrapper}>
         <PlayButtonIcon />
+
         <section className={styles.deckInfo}>
           <h2>{deck?.deckName}</h2>
           <span>{deck.cards?.length} Cards</span>
@@ -42,7 +43,11 @@ export default function JoshStagingArea() {
         </section>
         <ListBox className={`${styles.container} ${styles.column}`}>
           {deck.cards?.map((card) => (
-            <ListBoxItem key={card._id} className={styles.columnBox}><div className={styles.smallCard}><span className={styles.smallCardAnswer}>{card.front}</span></div></ListBoxItem>
+            <ListBoxItem key={card._id} className={styles.columnBox}>
+              <div className={styles.smallCard}>
+                <span className={styles.smallCardAnswer}>{card.front}</span>
+              </div>
+            </ListBoxItem>
           ))}
         </ListBox>
       </div>
