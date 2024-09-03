@@ -33,7 +33,13 @@ export default function McqKidsCard() {
             id={i}
             key={`${i}-${step}-${isInitialStep}`}
           >
-            <McqKidsCardOption answer={answer} idx={idx} step={step}>
+            <McqKidsCardOption
+              answer={answer}
+              idx={idx}
+              step={step}
+              length={distractors.length}
+              key={`${i}-${step}-${isInitialStep}`}
+            >
               {i}
             </McqKidsCardOption>
           </ListBoxItem>

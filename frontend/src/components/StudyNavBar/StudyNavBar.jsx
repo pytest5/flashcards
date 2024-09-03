@@ -6,13 +6,12 @@ import styles from "./StudyNavBar.module.css";
 import { Link, useLocation } from "react-router-dom";
 import FlashCardProgressBar from "../FlashCardProgressBar/FlashCardProgressBar";
 
-export default function StudyNavBar({ step, length }) {
+export default function StudyNavBar({ step, length, resetProgress }) {
   const location = useLocation();
+  const currPath = location.pathname.split("/").at(-1);
   const sessionPaths = ["mcq-kids", "summary", "mcq", "front-back"];
-  const isAtStagingPath = location.pathname.split("/").at(-1) === "session";
-  const isAtSessionPath = sessionPaths.includes(
-    location.pathname.split("/").at(-1)
-  );
+  const isAtStagingPath = currPath === "session";
+  const isAtSessionPath = sessionPaths.includes(currPath);
 
   return (
     <nav>
@@ -22,16 +21,14 @@ export default function StudyNavBar({ step, length }) {
             <IoMdArrowBack color="white" />
           </Link>
         ) : (
-          <Link to="./">
+          <Link to="./" onClick={resetProgress}>
             <RxCross2 color="white" />
           </Link>
         )}
         {isAtSessionPath && (
-          <>
-            <div>
-              {step + 1}/{length}
-            </div>
-          </>
+          <div>
+            {step + 1}/{length}
+          </div>
         )}
         <BsThreeDots />
       </div>
@@ -43,13 +40,3 @@ export default function StudyNavBar({ step, length }) {
     </nav>
   );
 }
-
-/* 
-export default function FlashCardProgressBar({ step, length }) {
-  return (
-    <div>
-      {step + 1}/{length}
-    </div>
-  );
-}
- */
