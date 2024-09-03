@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const DecksController = require("../controllers/DecksController")
+const DecksController = require("../controllers/DecksController");
 
 router.get("/", DecksController.index);
+router.get("/currentUser", DecksController.getCurrentUserDecks);
 router.get("/:deckId", DecksController.show);
 router.post("/", DecksController.create);
 router.delete("/:deckId", DecksController.destroy);

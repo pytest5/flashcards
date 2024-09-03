@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const SubjectsController = require("../controllers/SubjectsController.js");
+const { verifyToken } = require("../middleware/verify-token.js");
 
 // get all subjects
 router.get("/", SubjectsController.getAll);

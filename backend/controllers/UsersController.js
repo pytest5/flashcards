@@ -5,7 +5,7 @@ const {
 } = require("date-fns");
 const { isEmail } = require("validator");
 const { hashSync, compareSync } = require("bcrypt");
-const { sign } = require("jsonwebtoken");
+const { sign, JsonWebTokenError } = require("jsonwebtoken");
 
 const SALT_LENGTH = 12;
 
@@ -172,11 +172,8 @@ const login = async (req, res) => {
       return res.status(401).json({ error: "User not found" });
     }
     if (user && compareSync(req.body.password, user.hashedPassword)) {
-      const token = sign(
-        { username: user.username, _id: user._id },
-        process.env.JWT_SECRET
-      );
-      res.status(200).json({ token });
+      const token = sign({ id: user._id }, process.env.JWT_SECRET);
+      res.status(200).json(token);
     } else {
       res.status(401).json({ error: "Invalid email or password." });
     }
