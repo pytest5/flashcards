@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../services/userService";
-import "./LoginPage.module.css";
+// import styles from "./LoginPage.module.css";
 
 export default function LoginPage() {
   const {
@@ -14,6 +14,7 @@ export default function LoginPage() {
   const onSubmit = async (formData) => {
     console.log(formData);
     const token = await login(formData);
+    console.log(token);
     if (token) {
       navigate("/home");
     }
