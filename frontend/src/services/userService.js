@@ -57,3 +57,21 @@ export const deleteUser = async (userId) => {
     console.error(error.message);
   }
 };
+
+export const login = async (data) => {
+  try {
+    const response = await fetch(`${BASE_URL}/login`, {
+      method: "POST",
+      headers: HEADERS,
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const json = await response.json();
+    return json.token;
+  } catch (error) {
+    console.error(error.message);
+  }
+};

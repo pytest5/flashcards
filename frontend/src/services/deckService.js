@@ -49,9 +49,9 @@ export const getDecksBySubject = async (subject) => {
     }
   };
 
-export const loadDeck = async (userId) => {
+export const loadDeck = async (deckId) => {
   try {
-    const response = await fetch(`${BASE_URL}/${userId}`, {
+    const response = await fetch(`${BASE_URL}/${deckId}`, {
       headers: HEADERS,
     });
     if (!response.ok) {

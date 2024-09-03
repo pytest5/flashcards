@@ -1,0 +1,18 @@
+meta {
+  name: Login-User
+  type: http
+  seq: 13
+}
+
+post {
+  url: http://localhost:3000/api/users/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "josh5@test.com",
+    "password": "1234"
+  }
+}

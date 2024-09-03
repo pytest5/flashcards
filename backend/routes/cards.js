@@ -4,7 +4,7 @@ const router = express.Router();
 const CardsController = require("../controllers/CardsController");
 
 // get all cards by current user id
-router.get("/", CardsController.getAllByCurrentUserId);
+router.get("/", CardsController.index);
 
 // get by card id
 router.get("/:cardId", CardsController.getByCardId);
