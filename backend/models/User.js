@@ -31,7 +31,6 @@ const userSchema = new Schema({
 userSchema.set("toJSON", {
   transform: (document, returnedObject) => {
     delete returnedObject.hashedPassword;
-    delete returnedObject.email;
     delete returnedObject.dateOfBirth;
   },
 });

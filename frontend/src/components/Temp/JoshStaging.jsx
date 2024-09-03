@@ -8,11 +8,11 @@ import { useState, useEffect } from "react";
 import { loadDeck } from "../../services/deckService";
 import { getCardsByDeckId } from "../../services/cardService";
 
-const mockDecks = [
-  { id: 1, answer: "花", audioSrc: "www.test.com" },
-  { id: 2, answer: "草", audioSrc: "www.test.com" },
-  { id: 3, answer: "树", audioSrc: "www.test.com" },
-];
+// const mockDecks = [
+//   { id: 1, answer: "花", audioSrc: "www.test.com" },
+//   { id: 2, answer: "草", audioSrc: "www.test.com" },
+//   { id: 3, answer: "树", audioSrc: "www.test.com" },
+// ];
 
 export default function JoshStagingArea() {
   const [deck, setDeck] = useState({});
@@ -31,7 +31,6 @@ export default function JoshStagingArea() {
     onLoad();
   }, []);
 
-  console.log(deck);
   return (
     <>
       <div className={styles.stagingAreaWrapper}>

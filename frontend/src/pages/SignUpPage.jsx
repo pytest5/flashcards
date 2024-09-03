@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { createUser } from "../services/userService";
 import { useNavigate } from "react-router-dom";
+import "./SignUpPage.module.css"
 
 export default function SignUpPage() {
   const {
@@ -59,8 +60,7 @@ export default function SignUpPage() {
           />
         </div>
         <div className="form-control">
-          <label></label>
-          <button type="submit">Sign Up</button>
+          <input type="submit" value="Sign Up" />
         </div>
       </form>
     </>
