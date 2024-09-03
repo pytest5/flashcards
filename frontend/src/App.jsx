@@ -24,9 +24,10 @@ function App() {
       </Route>
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/decks/:deckId/session" element={<StudyLayout />}>
-        <Route index element={<StagingArea />} />
+        {/* done */}
+        <Route index element={<StagingArea />} /> {/* done */}
         <Route path="front-back" element={<FrontBackCard />} />
-        <Route path="mcq" element={<McqCard />} />
+        <Route path="mcq" element={<McqCard />} /> {/* done */}
         <Route path="mcq-kids" element={<McqKidsCard />} />
         <Route path="summary" element={<Summary />} />
       </Route>

@@ -2,11 +2,12 @@ import React from "react";
 import { getAudioUrl } from "../../services/textToSpeechService";
 import McqKidsCardOption from "../McqKidsCardOption/McqKidsCardOption";
 import { useOutletContext } from "react-router-dom";
-import { GridList, GridListItem, Button } from "react-aria-components";
+import { Button, ListBox, ListBoxItem } from "react-aria-components";
+import styles from "./McqKidsCard.module.css";
 
 export default function McqKidsCard() {
   const [src, setSrc] = React.useState("");
-  const [isInitialStep, setIsInitialStep] = React.useState(true);
+  const [isInitialStep] = React.useState(true);
   const audioRef = React.useRef();
   const { step, answer, distractors, handleAddStep } = useOutletContext();
 
@@ -18,32 +19,35 @@ export default function McqKidsCard() {
     initializeAudio();
   }, [answer]);
 
-  function handlePlay() {
-    audioRef.current.play();
-    setIsInitialStep(false);
-  }
+  // function handlePlay() {
+  //   audioRef.current.play();
+  //   setIsInitialStep(false);
+  // }
 
   return (
-    <>
-      <GridList aria-label="mcq kids card options" selectionMode="multiple">
+    <div className={styles.mcqWrapper}>
+      <ListBox className={styles.mcqContainer}>
         {distractors.map((i, idx) => (
-          <GridListItem key={`${i}-${step}-${isInitialStep}`}>
+          <ListBoxItem
+            className={styles.mcqOptionBox}
+            id={i}
+            key={`${i}-${step}-${isInitialStep}`}
+          >
             <McqKidsCardOption answer={answer} idx={idx} step={step}>
               {i}
             </McqKidsCardOption>
-          </GridListItem>
+          </ListBoxItem>
         ))}
-      </GridList>
+      </ListBox>
       <audio src={src} ref={audioRef} autoPlay={true} />
-      {isInitialStep ? (
-        <Button onPress={handlePlay} style={{ width: "110px" }}>
-          Start
-        </Button>
+      {/* {isInitialStep ? (
+        <Button onPress={handlePlay}>Start</Button>
       ) : (
-        <Button onPress={handleAddStep} style={{ width: "110px" }}>
-          Continue
-        </Button>
-      )}
-    </>
+        <Button onPress={handleAddStep}>Continue</Button>
+      )} */}
+      <Button className={styles.mcqContinueBtn} onPress={handleAddStep}>
+        Continue
+      </Button>
+    </div>
   );
 }

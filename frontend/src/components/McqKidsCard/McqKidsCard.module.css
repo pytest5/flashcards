@@ -1,0 +1,22 @@
+.mcqWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.mcqContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.mcqOptionBox {
+  border: 1px solid white;
+  border-radius: 8px;
+}
+
+.mcqContinueBtn {
+  margin-top: 15px;
+  padding: 16px;
+  border-radius: 10px;
+}
