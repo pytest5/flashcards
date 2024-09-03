@@ -5,7 +5,7 @@ const { verifyToken } = require("../middleware/verify-token.js");
 
 router.post("/", UsersController.create);
 router.post("/login", UsersController.login);
-
+router.get("/currentUser", verifyToken, UsersController.getCurrentUser);
 router.get("/", verifyToken, UsersController.index);
 router.get("/:userId", verifyToken, UsersController.show);
 router.delete("/:userId", verifyToken, UsersController.destroy);
