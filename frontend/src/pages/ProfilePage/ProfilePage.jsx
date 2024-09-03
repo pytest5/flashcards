@@ -1,11 +1,11 @@
 import React from "react";
 import { Button } from "react-aria-components";
-import "./ProfilePage.module.css"
+import styles from "./ProfilePage.module.css";
 
 export default function ProfilePage({ user }) {
   return (
     <>
-      <div id="profileImage">{user.userName[0]}</div>
+      <div className={styles.profileImage}>{user.userName[0]}</div>
       <h4>{user.userName}</h4>
       <h4>{user.email}</h4>
       <Button>Logout</Button>
