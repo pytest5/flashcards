@@ -16,12 +16,7 @@ export const getDecksByUserId = async (userId) => {
     }
 
     const json = await response.json();
-    console.log(json);
-    return json.records.map((record) => {
-      return {
-        record,
-      };
-    });
+    return json;
   } catch (error) {
     console.error(error.message);
   }
@@ -38,12 +33,7 @@ export const getDecksBySubject = async (subject) => {
       }
   
       const json = await response.json();
-      console.log(json);
-      return json.records.map((record) => {
-        return {
-          record,
-        };
-      });
+      return json;
     } catch (error) {
       console.error(error.message);
     }

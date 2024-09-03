@@ -16,6 +16,14 @@ import StagingArea from "./components/StagingArea/StagingArea";
 import SignUpPage from "./pages/SignUpPage";
 import JoshStagingArea from "./components/Temp/JoshStaging"
 
+const mockUser = {
+  "_id": "66d17ae8e1a667e4592afeea",
+  "userName": "test",
+  "email": "josh1@test.com",
+  "role": "user",
+  "__v": 0
+}
+
 function App() {
   return (
     <Routes>
@@ -25,7 +33,7 @@ function App() {
       <Route path="/home" element={<HomePage />}>
         <Route path="dashboard" element={<DashBoard />} />
       </Route>
-      <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/profile" element={<ProfilePage user={mockUser} />} />
       <Route path="/decks/:deckId/session" element={<StudyLayout />}>
         {/* done */}
         <Route index element={<StagingArea />} /> {/* done */}

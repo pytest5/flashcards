@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { login } from "../services/userService";
+import "./LoginPage.module.css"
 
 export default function LoginPage() {
   const {
@@ -30,8 +31,7 @@ export default function LoginPage() {
           <input type="password" name="password" {...register("password")} />
         </div>
         <div className="form-control">
-          <label></label>
-          <button type="submit">Login</button>
+          <input type="submit" value="Login" />
         </div>
       </form>
     </>
