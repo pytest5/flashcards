@@ -12,6 +12,7 @@ export default function StudyLayout() {
   ];
   const answer = mockData[step].answer;
   const distractors = mockData[step].distractors;
+  const length = mockData.length;
 
   function handleAddStep() {
     if (step === mockData.length - 1) return;
@@ -20,7 +21,7 @@ export default function StudyLayout() {
 
   return (
     <div className={styles.studyLayoutWrapper}>
-      <StudyNavBar />
+      <StudyNavBar step={step} length={length} />
       <Outlet context={{ step, answer, distractors, handleAddStep }} />
     </div>
   );
