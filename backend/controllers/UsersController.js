@@ -64,6 +64,17 @@ const validateData = (data) => {
   }
 };
 
+async function getCurrentUser(req, res) {
+  const currentUserId = req.user.id;
+  try {
+    const currUser = await User.findById(currentUserId);
+    res.json(currUser);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: `Unable to retrieve current user details` });
+  }
+}
+
 const create = async (req, res) => {
   const data = req.body;
   if (data.password !== data.confirmPassword) {
@@ -182,4 +193,12 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { create, index, show, destroy, update, login };
+module.exports = {
+  getCurrentUser,
+  create,
+  index,
+  show,
+  destroy,
+  update,
+  login,
+};

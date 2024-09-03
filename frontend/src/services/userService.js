@@ -6,6 +6,22 @@ const HEADERS = {
   Authorization: `Bearer ${JSON.parse(localStorage.getItem("jwt"))}`,
 };
 
+export async function getCurrentUser() {
+  try {
+    const response = await fetch(`${BASE_URL}/currentUser`, {
+      method: "GET",
+      headers: HEADERS,
+    });
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
 export const getUserById = async (userId) => {
   try {
     const response = await fetch(`${BASE_URL}/${userId}`, {
@@ -14,7 +30,6 @@ export const getUserById = async (userId) => {
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
-
     const json = await response.json();
     console.log(json);
     return { id: json._id, username: json.userName };
