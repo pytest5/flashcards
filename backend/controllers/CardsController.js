@@ -47,6 +47,7 @@ async function create(req, res) {
     if (!card) return res.status(404).json({ error: "Error creating card" });
     // check if user exists
     const user = await User.findById(currentUserId);
+    console.log(currentUserId);
     if (!user)
       return res
         .status(404)

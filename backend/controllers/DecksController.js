@@ -60,6 +60,7 @@ const validateData = (data) => {
 async function getCurrentUserDecks(req, res) {
   try {
     const decks = await Deck.find({ user: req.user.id });
+    console.log(decks);
     res.json(decks);
   } catch (e) {
     console.error(e);

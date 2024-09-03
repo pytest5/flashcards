@@ -15,6 +15,10 @@ export default function Dashboard() {
     onLoad();
   }, []);
 
+  if (decks.length === 0) {
+    return <div>Add a deck!</div>;
+  }
+
   return (
     <>
       <h2>Your Decks</h2>
