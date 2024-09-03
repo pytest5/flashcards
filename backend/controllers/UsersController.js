@@ -5,8 +5,10 @@ const {
   startOfToday, // prevents user from submitting a DOB thats in the future / too far in the past
 } = require("date-fns");
 const { isEmail } = require("validator");
-// const { hashSync, compareSync } = require("bcrypt");
-// const { sign } = require("jsonwebtoken");
+const { hashSync, compareSync } = require("bcrypt");
+const { sign } = require("jsonwebtoken");
+
+const SALT_LENGTH = 12;
 
 // validation check for POST
 const isFormFilled = (data) => {
@@ -16,8 +18,11 @@ const isFormFilled = (data) => {
   if (!data.email) {
     return { error: "An email address is required." };
   }
-  if (!data.hashedPassword) {
+  if (!data.password) {
     return { error: "A password is required." };
+  }
+  if (!data.confirmPassWord) {
+    return { error: "A matching password for confirmation is required." };
   }
   if (!data.dateOfBirth) {
     return { error: "You date of birth is required." };
@@ -50,10 +55,10 @@ const validateData = (data) => {
   if (data.email && !isEmail(data.email)) {
     return { error: "Invalid email address." };
   }
-  if (data.hashedPassword && data.hashedPassword.trim() === "") {
+  if (data.password && data.password.trim() === "") {
     return { error: "A password is required." };
   }
-  if (data.hashedPassword && !passwordRegex.test(data.hashedPassword)) {
+  if (data.password && !passwordRegex.test(data.password)) {
     return {
       error: "Please refer to minimum requirements for setting a password.",
     };
@@ -74,6 +79,9 @@ const validateData = (data) => {
 
 const create = async (req, res) => {
   const data = req.body;
+  if (data.password !== data.confirmPassword) {
+    return res.status(400).json({ error: "password does not match" });
+  }
   const notFilled = isFormFilled(data);
   if (notFilled) {
     return res.status(400).json(notFilled);
@@ -95,6 +103,10 @@ const create = async (req, res) => {
     const [year, month, day] = data.dateOfBirth;
 
     data.dateOfBirth = formatISO(new Date(year, month, day, 0, 0, 0));
+
+    data.hashedPassword = hashSync(data.password, SALT_LENGTH);
+    delete data.password;
+    delete data.confirmPassWord;
 
     const user = await User.create(data);
     res.status(200).json(user);
@@ -170,4 +182,24 @@ const update = async (req, res) => {
   }
 };
 
-module.exports = { create, index, show, destroy, update };
+const login = async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+    if (user === null) {
+      return res.status(401).json({ error: "User not found" });
+    }
+    if (user && compareSync(req.body.password, user.hashedPassword)) {
+      const token = sign(
+        { username: user.username, _id: user._id },
+        process.env.JWT_SECRET
+      );
+      res.status(200).json({ token });
+    } else {
+      res.status(401).json({ error: "Invalid email or password." });
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+module.exports = { create, index, show, destroy, update, login };

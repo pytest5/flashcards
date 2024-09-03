@@ -1,14 +1,16 @@
-import React from "react";
 import { Link } from "react-router-dom";
+import { Button } from "react-aria-components";
 
 export default function LandingPage() {
   return (
     <>
       <div>Welcome</div>
-      <Link>
-        <button>Register</button>
+      <Link to="/signup">
+        <Button>Register</Button>
       </Link>
-      <button>Sign In</button>
+      <Link to="/login">
+        <Button>Log In</Button>
+      </Link>
     </>
   );
 }

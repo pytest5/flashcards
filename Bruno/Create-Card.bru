@@ -1,0 +1,23 @@
+meta {
+  name: Create-Card
+  type: http
+  seq: 14
+}
+
+post {
+  url: http://localhost:3000/api/cards
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "front": "Test4",
+    "rear": "Answer4",
+    "isChildFriendly": "true",
+    "isMultipleChoice": "false",
+    "deckId": "66d20205d84ee450ba640999",
+    "user": "66d17ae8e1a667e4592afeea",
+    "distractors": [0, 1]
+  }
+}

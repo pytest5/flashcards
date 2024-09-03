@@ -81,7 +81,7 @@ const index = async (req, res) => {
     if (decks.length === 0) {
       return res.status(404).json({ error: "Resource not found" });
     }
-    res.status(200).json({ data: decks });
+    res.status(200).json(decks);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -97,7 +97,7 @@ const show = async (req, res) => {
     if (deck === null) {
       return res.status(404).json({ error: "Resource not found" });
     }
-    res.status(200).json({ data: deck });
+    res.status(200).json(deck);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
