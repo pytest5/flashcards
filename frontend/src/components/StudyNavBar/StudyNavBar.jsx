@@ -17,8 +17,8 @@ export default function StudyNavBar() {
           <IoMdArrowBack color="white" />
         </Link>
       ) : (
-        <Link>
-          <RxCross2 />
+        <Link to="./">
+          <RxCross2 color="white" />
         </Link>
       )}
       <BsThreeDots />
