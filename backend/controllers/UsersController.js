@@ -1,6 +1,5 @@
 const User = require("../models/User");
 const {
-  formatISO,
   differenceInCalendarYears,
   startOfToday, // prevents user from submitting a DOB thats in the future / too far in the past
 } = require("date-fns");
@@ -21,7 +20,7 @@ const isFormFilled = (data) => {
   if (!data.password) {
     return { error: "A password is required." };
   }
-  if (!data.confirmPassWord) {
+  if (!data.confirmPassword) {
     return { error: "A matching password for confirmation is required." };
   }
   if (!data.dateOfBirth) {
@@ -34,10 +33,7 @@ const validateData = (data) => {
   const passwordRegex = /^[A-Za-z\d]{3,}$/; // checks if alpha numeric and minlength 3
   let age = -1;
   if (data.dateOfBirth) {
-    age = differenceInCalendarYears(
-      startOfToday(),
-      formatISO(new Date(data.dateOfBirth[0], 0, 1, 0, 0, 0)) // redo when using datepicker
-    );
+    age = differenceInCalendarYears(startOfToday(), data.dateOfBirth);
   }
 
   for (const key in data) {
@@ -63,16 +59,7 @@ const validateData = (data) => {
       error: "Please refer to minimum requirements for setting a password.",
     };
   }
-  if (
-    data.dateOfBirth &&
-    (data.dateOfBirth.length !== 3 ||
-      data.dateOfBirth[1] < 0 ||
-      data.dateOfBirth[1] > 11 ||
-      data.dateOfBirth[2] < 1 ||
-      data.dateOfBirth[2] > 31 ||
-      age > 200 ||
-      age < 0)
-  ) {
+  if (data.dateOfBirth && (age > 200 || age < 0)) {
     return { error: "Please select a valid date of birth" };
   }
 };
@@ -99,10 +86,6 @@ const create = async (req, res) => {
         .status(409)
         .json({ error: "You already have an existing account" });
     }
-
-    const [year, month, day] = data.dateOfBirth;
-
-    data.dateOfBirth = formatISO(new Date(year, month, day, 0, 0, 0));
 
     data.hashedPassword = hashSync(data.password, SALT_LENGTH);
     delete data.password;

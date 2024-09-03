@@ -1,19 +1,26 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { login } from "../services/userService";
 
 export default function LoginPage() {
-  const { register, handleSubmit, formState: { errors }, } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const navigate = useNavigate();
 
-  const onSubmit = (formData) => {
+  const onSubmit = async (formData) => {
     console.log(formData);
-    // if (!formData.email || !formData.password){
-
-    // }
-  }
+    const token = await login(formData);
+    if (token) {
+      navigate("/home");
+    }
+  };
 
   return (
     <>
-    <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-control">
           <label>Email</label>
           <input type="text" name="email" {...register("email")} />

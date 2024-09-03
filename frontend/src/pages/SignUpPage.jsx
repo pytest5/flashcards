@@ -1,17 +1,28 @@
-import { useForm } from "react-hook-form"
-import { DatePicker } from "react-aria-components";
+import { useForm } from "react-hook-form";
+import { createUser } from "../services/userService";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUpPage() {
-  const { register, handleSubmit, formState: {errors} } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
-  }
+  const navigate = useNavigate();
+
+  const onSubmit = async (formData) => {
+    const result = await createUser(formData);
+    console.log(result);
+    if (result) {
+      navigate("/login");
+    }
+  };
 
   return (
     <>
-    <form onSubmit={handleSubmit(onSubmit)}>
-    <div className="form-control">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="form-control">
           <label>Username</label>
           <input type="text" name="userName" {...register("userName")} />
         </div>
@@ -25,13 +36,31 @@ export default function SignUpPage() {
         </div>
         <div className="form-control">
           <label>Confirm Password</label>
-          <input type="password" name="conFirmPassword" {...register("confirmPassword", {
-            required: true
-          })} />
+          <input
+            type="password"
+            name="conFirmPassword"
+            {...register("confirmPassword", {
+              required: true,
+            })}
+          />
+        </div>
+        <div className="form-control">
+          <label>Date of Birth</label>
+          <input
+            type="date"
+            name="dateOfBirth"
+            {...register("dateOfBirth", {
+              valueAsDate: true,
+              required: {
+                value: true,
+                message: "Date of Birth is required",
+              },
+            })}
+          />
         </div>
         <div className="form-control">
           <label></label>
-          <button type="submit">Login</button>
+          <button type="submit">Sign Up</button>
         </div>
       </form>
     </>

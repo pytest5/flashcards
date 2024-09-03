@@ -60,11 +60,9 @@ export const deleteUser = async (userId) => {
 
 export const login = async (data) => {
   try {
-    const response = await fetch("${BASE_URL}/login", {
+    const response = await fetch(`${BASE_URL}/login`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: HEADERS,
       body: JSON.stringify(data),
     });
     if (!response.ok) {

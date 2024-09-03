@@ -14,7 +14,7 @@ import McqKidsCard from "./components/McqKidsCard/McqKidsCard";
 import LoginPage from "./pages/LoginPage";
 import StagingArea from "./components/StagingArea/StagingArea";
 import SignUpPage from "./pages/SignUpPage";
-import JoshStagingArea from "./components/Temp/JoshStaging";
+import JoshStagingArea from "./components/Temp/JoshStaging"
 
 function App() {
   return (
