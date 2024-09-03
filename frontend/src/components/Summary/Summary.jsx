@@ -18,10 +18,7 @@ export default function Summary() {
           <Button>Back to home</Button>
         </Link>
         <Link to="../">
-          <Button>Try again</Button>
-        </Link>
-      </div>
-    </div>
+          <Button>Try again!
   );
 }
 
