@@ -1,19 +1,19 @@
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LandingPage from "./pages/LandingPage";
-import ProfilePage from "./pages/ProfilePage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import CreateDeckPage from "./pages/CreateDeckPage";
 import CreateCardsPage from "./pages/CreateDeckPage";
-import DashBoard from "./components/DashBoard";
+import DashBoard from "./components/Dashboard/DashBoard";
 import EditDeckForm from "./components/EditDeckForm";
 import StudyLayout from "./components/StudyLayout/StudyLayout";
 import Summary from "./components/Summary/Summary";
 import FrontBackCard from "./components/FrontBackCard";
 import McqCard from "./components/McqCard";
 import McqKidsCard from "./components/McqKidsCard/McqKidsCard";
-import LoginPage from "./pages/LoginPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
 import StagingArea from "./components/StagingArea/StagingArea";
-import SignUpPage from "./pages/SignUpPage";
+import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import JoshStagingArea from "./components/Temp/JoshStaging";
 
 const mockUser = {

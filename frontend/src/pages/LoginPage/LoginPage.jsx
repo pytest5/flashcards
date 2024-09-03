@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { login } from "../services/userService";
-import "./LoginPage.module.css"
+import { login } from "../../services/userService";
+import "./LoginPage.module.css";
 
 export default function LoginPage() {
   const {

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getDecksByUserId } from "../services/deckService";
+import { getDecksByUserId } from "../../services/deckService";
 import { GridList, GridListItem, Button } from "react-aria-components";
 // import "./Dashboard.module.css";
 import { Link } from "react-router-dom";
@@ -22,7 +22,9 @@ export default function Dashboard() {
         {decks.map((deck) => (
           <GridListItem key={deck._id} textValue={deck.deckName}>
             <Link to={`/decks/${deck._id}/session`}>{deck.deckName}</Link>
-            <Link to={`/decks/${deck._id}/edit`}><Button>...</Button></Link>
+            <Link to={`/decks/${deck._id}/edit`}>
+              <Button>...</Button>
+            </Link>
           </GridListItem>
         ))}
       </GridList>
