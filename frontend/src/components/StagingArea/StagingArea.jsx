@@ -22,9 +22,17 @@ const mockFrontBackDecks = [
 export default function StagingArea() {
   return (
     <div className={styles.stagingAreaWrapper}>
-      <ListBox items={mockDecks} className={styles.container}>
+      <ListBox
+        items={mockDecks}
+        className={styles.container}
+        aria-label="Deck list"
+      >
         {(item) => (
-          <ListBoxItem key={item.id} className={styles.rowBox}>
+          <ListBoxItem
+            key={item.id}
+            className={styles.rowBox}
+            textValue="Deck details"
+          >
             <div className={styles.bigCard}>{item.answer}</div>
           </ListBoxItem>
         )}
