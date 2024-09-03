@@ -1,7 +1,23 @@
-.wrapper {
+.mcqOptionWrapper {
   display: flex;
   justify-content: start;
   align-items: center;
   padding: 15px;
   gap: 15px;
+  border: 1px solid white;
+  border-radius: 8px;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+  border: 1px solid hsl(0, 0%, 48%);
+}
+
+.answer {
+  border: 1px solid green;
+}
+
+.wrong {
+  border: 1px solid red;
 }
