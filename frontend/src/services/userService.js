@@ -70,7 +70,7 @@ export const login = async (data) => {
     }
 
     const json = await response.json();
-    return json.token;
+    return json;
   } catch (error) {
     console.error(error.message);
   }
