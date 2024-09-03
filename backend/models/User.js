@@ -18,8 +18,7 @@ const userSchema = new Schema({
   hashedPassword: {
     type: String,
     required: [true, "a password is required"],
-    match: /^[A-Za-z\d]{3,}$/,
-  }, //bcrypt is alphanumeric only, setting minlength of 3 for test purposes
+  },
   dateOfBirth: { type: Date, required: [true, "date of birth is required"] },
   role: {
     type: String,

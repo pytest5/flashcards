@@ -13,11 +13,14 @@ import McqCard from "./components/McqCard";
 import McqKidsCard from "./components/McqKidsCard/McqKidsCard";
 import LoginPage from "./pages/LoginPage";
 import StagingArea from "./components/StagingArea/StagingArea";
+import SignUpPage from "./pages/SignUpPage";
+import JoshStagingArea from "./components/Temp/JoshStaging"
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
+      <Route path="/signup" element={<SignUpPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/home" element={<HomePage />}>
         <Route path="dashboard" element={<DashBoard />} />
@@ -34,6 +37,7 @@ function App() {
       <Route path="/decks/new" element={<CreateDeckPage />} />
       <Route path="/decks/:deckId/edit" element={<EditDeckForm />} />
       <Route path="/decks/:deckId/cards/new" element={<CreateCardsPage />} />
+      <Route path="josh/staging" element={<JoshStagingArea />} />
     </Routes>
   );
 }
