@@ -1,0 +1,26 @@
+.react-aria-ProgressBar {
+  display: grid;
+  grid-template-areas: "bar bar";
+  grid-template-columns: 1fr auto;
+  gap: 4px;
+
+  --text-color: white;
+  --highlight-background: salmon;
+  --border-color: hsl(6, 46%, 64%);
+  color: var(--text-color);
+
+  .bar {
+    grid-area: bar;
+    box-shadow: inset 0px 0px 0px 1px var(--border-color);
+    forced-color-adjust: none;
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    will-change: transform;
+  }
+
+  .fill {
+    background: var(--highlight-background);
+    height: 100%;
+  }
+}
