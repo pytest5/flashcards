@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import LandingPage from "./pages/LandingPage";
+import LandingPage from "./pages/LandingPage/LandingPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import CreateDeckPage from "./pages/CreateDeckPage";
 import CreateCardsPage from "./pages/CreateDeckPage";
@@ -19,9 +19,9 @@ import JoshStagingArea from "./components/Temp/JoshStaging";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/signup" element={<SignUpPage />} />
-      <Route path="/login" element={<LoginPage />} />
+      <Route path="/" element={<LandingPage />} /> {/* styled */}
+      <Route path="/signup" element={<SignUpPage />} /> {/* styled */}
+      <Route path="/login" element={<LoginPage />} /> {/* styled */}
       <Route path="/home" element={<HomePage />}>
         <Route path="dashboard" element={<DashBoard />} />
       </Route>

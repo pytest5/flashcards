@@ -1,8 +1,46 @@
 :root {
+  --primary-color: hsl(230, 58%, 52%);
+  --darkest-variation: hsl(234, 40%, 14%);
+  --dark-variation: hsl(234, 15%, 38%);
+  --medium-variation: hsl(234, 14%, 59%);
+  --light-variation: hsl(230, 45%, 90%);
+  --lightest-variation: hsl(225, 25%, 97%);
+  --white: hsl(0, 0%, 100%);
+  --font-size-1: 12px; /* Smallest */
+  --font-size-2: 14px;
+  --font-size-3: 16px; /* Base size */
+  --font-size-4: 20px;
+  --font-size-5: 24px;
+  --font-size-6: 32px; /* Largest */
+  --font-weight-1: 400; /* Normal */
+  --font-weight-2: 700; /* Bold */
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 16px; /* Base spacing */
+  --spacing-4: 24px;
+  --spacing-5: 32px;
+  --spacing-6: 48px;
+  --line-height-1: 1.2;
+  --line-height-2: 1.5; /* Base line height */
+  --line-height-3: 1.8;
+  --button-padding: var(--spacing-2) var(--spacing-3);
+  --button-border-radius: var(--border-radius-2);
+  --button-font-size: var(--font-size-3);
+  --button-text-color: var(--white);
+  --button-bg-color: var(--primary-color);
+  --input-padding: var(--spacing-2) var(--spacing-3);
+  --input-border-radius: var(--border-radius-1);
+  --input-border-color: var(--light-variation);
+  --input-focus-border-color: var(--primary-color);
+  --border-radius-1: 4px; /* Small radius */
+  --border-radius-2: 8px; /* Standard radius */
+  --border-radius-3: 16px; /* Larger radius */
+  --border-radius-4: 50%; /* For circular shapes like profile pictures */
+
   isolation: isolate;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: var(--white);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -87,4 +125,14 @@ textarea:not([rows]) {
 #root {
   isolation: isolate;
   height: 100%;
+}
+
+body,
+#root {
+  background-color: var(--white);
+  color: var(--dark-variation);
+}
+
+body {
+  padding: 20px;
 }
