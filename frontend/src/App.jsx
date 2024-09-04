@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+import HomePage from "./pages/HomePage/HomePage";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import CreateDeckPage from "./pages/CreateDeckPage";
@@ -13,6 +13,7 @@ import McqCard from "./components/McqCard";
 import McqKidsCard from "./components/McqKidsCard/McqKidsCard";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import StagingArea from "./components/StagingArea/StagingArea";
+import HomeContent from "./components/HomeContent/HomeContent";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import JoshStagingArea from "./components/Temp/JoshStaging";
 
@@ -23,9 +24,10 @@ function App() {
       <Route path="/signup" element={<SignUpPage />} /> {/* styled */}
       <Route path="/login" element={<LoginPage />} /> {/* styled */}
       <Route path="/home" element={<HomePage />}>
+        <Route index element={<HomeContent />} />
         <Route path="dashboard" element={<DashBoard />} />
+        <Route path="profile" element={<ProfilePage />} />
       </Route>
-      <Route path="/profile" element={<ProfilePage />} />
       <Route path="/decks/:deckId/session" element={<StudyLayout />}>
         {/* done */}
         <Route index element={<StagingArea />} /> {/* done */}
