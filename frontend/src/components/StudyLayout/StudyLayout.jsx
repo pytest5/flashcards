@@ -1,19 +1,28 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import StudyNavBar from "../StudyNavBar/StudyNavBar";
 import styles from "./StudyLayout.module.css";
+import { getCardsByDeckId } from "../../services/cardService";
 
 export default function StudyLayout() {
   const [step, setStep] = React.useState(0);
   const [score, setScore] = React.useState({ correct: 0, wrong: 0 });
+  const [cards, setCards] = React.useState([]);
+  const { deckId } = useParams();
 
-  const realData = [
-    { answer: "花", distractors: ["草", "树"] },
-    { answer: "草", distractors: ["花", "树"] },
-    { answer: "树", distractors: ["花", "草"] },
-  ];
+  React.useEffect(() => {
+    async function loadCards() {
+      const fetchedCards = await getCardsByDeckId(deckId);
+      setCards(fetchedCards);
+    }
+    loadCards();
+  }, [deckId]);
 
-  const sessionData = realData.map((i) => ({
+  if (!cards || cards.length === 0) {
+    return <h1>Loading...</h1>;
+  }
+
+  const sessionData = cards.map((i) => ({
     ...i,
     options: [...i.distractors, i.answer],
     isCorrect: null,

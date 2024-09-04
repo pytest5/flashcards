@@ -97,7 +97,7 @@ async function update(req, res) {
 const index = async (req, res) => {
   const { query } = req;
   try {
-    const cards = await Card.find(query);
+    const cards = await Card.find(query).populate("decks").exec();
     if (cards.length === 0) {
       return res.status(404).json({ error: "Resource not found" });
     }

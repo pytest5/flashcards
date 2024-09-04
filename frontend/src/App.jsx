@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+import HomeLayout from "./pages/HomeLayout/HomeLayout";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import CreateDeckPage from "./pages/CreateDeckPage/CreateDeckPage";
@@ -13,6 +13,7 @@ import McqCard from "./components/McqCard";
 import McqKidsCard from "./components/McqKidsCard/McqKidsCard";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import StagingArea from "./components/StagingArea/StagingArea";
+import HomeContent from "./components/HomeContent/HomeContent";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import JoshStagingArea from "./components/Temp/JoshStaging";
 
@@ -22,17 +23,18 @@ function App() {
       <Route path="/" element={<LandingPage />} /> {/* styled */}
       <Route path="/signup" element={<SignUpPage />} /> {/* styled */}
       <Route path="/login" element={<LoginPage />} /> {/* styled */}
-      <Route path="/home" element={<HomePage />}>
+      <Route path="/home" element={<HomeLayout />}>
+        <Route index element={<HomeContent />} />
         <Route path="dashboard" element={<DashBoard />} />
+        <Route path="profile" element={<ProfilePage />} />
       </Route>
-      <Route path="/profile" element={<ProfilePage />} />
       <Route path="/decks/:deckId/session" element={<StudyLayout />}>
-        {/* done */}
+        {/* styled but some functions not done*/}
         <Route index element={<StagingArea />} /> {/* done */}
         <Route path="front-back" element={<FrontBackCard />} />
         <Route path="mcq" element={<McqCard />} /> {/* done */}
         <Route path="mcq-kids" element={<McqKidsCard />} />
-        <Route path="summary" element={<Summary />} />
+        <Route path="summary" element={<Summary />} /> {/* styled */}
       </Route>
       <Route path="/decks/new" element={<CreateDeckPage />} />
       <Route path="/decks/:deckId/edit" element={<EditDeckForm />} />

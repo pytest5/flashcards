@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "react-aria-components";
 import styles from "./ProfilePage.module.css";
-import NavBar from "../../components/NavBar";
+import NavBar from "../../components/NavBar/NavBar";
 import { getCurrentUser } from "../../services/userService";
 
 export default function ProfilePage() {
