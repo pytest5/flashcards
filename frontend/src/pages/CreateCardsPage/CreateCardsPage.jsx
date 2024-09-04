@@ -42,9 +42,9 @@ export default function CreateCardsPage() {
       card.decks = [deck._id];
       card.user = deck.user;
     }
-    
+
     const cardsCreated = createCard(cards);
-    if (cardsCreated){
+    if (cardsCreated) {
       navigate("/home");
     }
   };
@@ -93,14 +93,14 @@ export default function CreateCardsPage() {
           {fields.map((field, index) => (
             <div key={field.id}>
               <div className={styles.formControl}>
+                <label>Prompt</label>
+                <input {...register(`cards.${index}.front`)} />
                 <label>Answer</label>
                 <input {...register(`cards.${index}.answer`)} />
                 <label>Distractors</label>
                 <input {...register(`cards.${index}.distractorOne`)} />
                 <input {...register(`cards.${index}.distractorTwo`)} />
                 <input {...register(`cards.${index}.distractorThree`)} />
-                <label>Audio URL</label>
-                <input {...register(`cards.${index}.audioUrl`)} />
                 <label>Child Friendly</label>
                 <input
                   type="checkbox"

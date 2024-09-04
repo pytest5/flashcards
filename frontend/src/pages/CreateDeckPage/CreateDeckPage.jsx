@@ -85,14 +85,14 @@ export default function CreateDeckPage() {
           name="type"
           {...register("type", { required: "Please select the type of deck" })}
         >
-          <option value="front-back">Regular</option>
           <option value="mcq-kids">MCQ</option>
+          <option value="front-back">Regular</option>
         </select>
       </div>
       <input
         className={styles.formSubmitButton}
         type="submit"
-        value="Create Deck"
+        value="Create Deck (Tick / Submit)"
       />
     </form>
   );
