@@ -5,6 +5,9 @@
   --medium-variation: hsl(234, 14%, 59%);
   --light-variation: hsl(230, 45%, 90%);
   --lightest-variation: hsl(225, 25%, 97%);
+  --warning-variation: hsl(6, 71%, 44%);
+  --bright-warning-variation: hsl(0, 75%, 60%);
+  --green-variation: hsl(162, 70%, 34%);
   --white: hsl(0, 0%, 100%);
   --font-size-1: 12px; /* Smallest */
   --font-size-2: 14px;
