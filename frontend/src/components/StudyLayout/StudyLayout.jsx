@@ -12,11 +12,11 @@ export default function StudyLayout() {
   const { deckId } = useParams();
 
   React.useEffect(() => {
-    async function loadDecks() {
+    async function loadCards() {
       const fetchedCards = await getCardsByDeckId(deckId);
       setCards(fetchedCards);
     }
-    loadDecks();
+    loadCards();
   }, [deckId]);
 
   if (!cards || cards.length === 0) {
