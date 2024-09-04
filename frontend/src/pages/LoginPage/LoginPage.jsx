@@ -32,7 +32,6 @@ export default function LoginPage() {
           <label>Password:</label>
           <input type="password" name="password" {...register("password")} />
         </div>
-
         <input
           className={styles.formSubmitButton}
           type="submit"
