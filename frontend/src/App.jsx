@@ -34,7 +34,7 @@ function App() {
         <Route path="front-back" element={<FrontBackCard />} />
         <Route path="mcq" element={<McqCard />} /> {/* done */}
         <Route path="mcq-kids" element={<McqKidsCard />} />
-        <Route path="summary" element={<Summary />} />
+        <Route path="summary" element={<Summary />} /> {/* styled */}
       </Route>
       <Route path="/decks/new" element={<CreateDeckPage />} />
       <Route path="/decks/:deckId/edit" element={<EditDeckForm />} />

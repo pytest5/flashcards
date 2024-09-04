@@ -6,6 +6,7 @@ import { HiOutlineSpeakerWave } from "react-icons/hi2";
 import { FaRegStar } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
 import { getCardsByDeckId } from "../../services/cardService";
+import { loadDeck } from "../../services/deckService";
 
 // const mockDecks = [
 //   { id: 1, answer: "花", audioSrc: "www.test.com" },
@@ -22,16 +23,22 @@ import { getCardsByDeckId } from "../../services/cardService";
 export default function StagingArea() {
   const { deckId } = useParams();
   const [cards, setCards] = React.useState([]);
-
+  const [deckInfo, setDeckInfo] = React.useState();
+  console.log(deckInfo);
   React.useEffect(() => {
-    async function loadDecks() {
+    async function loadCards() {
       const fetchedCards = await getCardsByDeckId(deckId);
       setCards(fetchedCards);
     }
-    loadDecks();
+    async function loadDeckInfo() {
+      const info = await loadDeck(deckId);
+      setDeckInfo(info);
+    }
+    loadCards();
+    loadDeckInfo();
   }, [deckId]);
 
-  if (!cards || cards.length === 0) {
+  if (!cards || cards.length === 0 || !deckInfo) {
     return <h1>Loading...</h1>;
   }
 
@@ -52,19 +59,26 @@ export default function StagingArea() {
           </ListBoxItem>
         )}
       </ListBox>
-      <PlayButtonIcon />
-      <Link to="front-back">Test front back</Link>
+      <div className={styles.playBtnContainer}>
+        <PlayButtonIcon color={"var(--primary-color)"} />
+      </div>
       <section className={styles.deckInfo}>
-        <h2>Deck name</h2>
-        <span>3 terms</span>
-        <div>deck description</div>
+        <h2>{deckInfo.deckName}</h2>
+        <div className={styles.secondaryDeckInfo}>
+          <div>{deckInfo.description}</div>
+          <span>{cards.length} terms</span>
+        </div>
       </section>
       <ListBox items={cards} className={`${styles.container} ${styles.column}`}>
         {(item) => (
           <ListBoxItem id={item._id} className={styles.columnBox}>
             <div className={styles.smallCard}>
               <span className={styles.smallCardAnswer}>{item.answer}</span>{" "}
-              <HiOutlineSpeakerWave /> <FaRegStar />
+              <HiOutlineSpeakerWave
+                strokeWidth={1.8}
+                color={"var(--primary-color)"}
+              />
+              {/* <FaRegStar color={"var(--primary-color)"} /> */}
             </div>
           </ListBoxItem>
         )}
