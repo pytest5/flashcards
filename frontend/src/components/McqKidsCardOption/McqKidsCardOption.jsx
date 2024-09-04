@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./McqKidsCardOption.module.css";
 import FlashCardOptionIcon from "../FlashCardOptionIcon/FlashCardOptionIcon";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import SmallCard from "../SmallCard/SmallCard";
 
 export default function McqKidsCardOption({
   answer,
@@ -16,7 +17,10 @@ export default function McqKidsCardOption({
   const navigate = useNavigate();
 
   function navToSummaryIfDone(step, length) {
+    console.log("hi", step, length);
+
     if (step + 1 === length) {
+      console.log("hi", step, length);
       setTimeout(() => navigate("../summary"), 1500);
     }
   }
@@ -30,13 +34,15 @@ export default function McqKidsCardOption({
   };
 
   return (
-    <div
-      onClick={handleClick(children)}
-      className={`${styles.mcqOptionWrapper} ${resultTracker[children] === "disabled" && styles.disabled} ${resultTracker[children] === "answer" && styles.answer} ${resultTracker[children] === "wrong" && styles.wrong}`}
-      key={step}
-    >
-      <FlashCardOptionIcon word={children} isCorrect={isCorrect} />
-      {children}
-    </div>
+    <>
+      <div
+        onClick={handleClick(children)}
+        className={`${styles.mcqOptionWrapper} ${resultTracker[children] === "disabled" && styles.disabled} ${resultTracker[children] === "answer" && styles.answer} ${resultTracker[children] === "wrong" && styles.wrong}`}
+      >
+        <FlashCardOptionIcon word={children} isCorrect={isCorrect} />
+
+        {children}
+      </div>
+    </>
   );
 }

@@ -8,7 +8,7 @@ import styles from "./McqKidsCard.module.css";
 export default function McqKidsCard() {
   const [src, setSrc] = React.useState("");
   const [isInitialStep] = React.useState(true);
-  const { step, answer, options, handleAddStep } = useOutletContext();
+  const { step, answer, options, length, handleAddStep } = useOutletContext();
   const [resultTracker, setResultTracker] = React.useState(() =>
     makeResultTracker()
   );
@@ -63,7 +63,7 @@ export default function McqKidsCard() {
               answer={answer}
               idx={idx}
               step={step}
-              length={options.length}
+              length={length}
               key={`${i}-${step}-${isInitialStep}`}
               resultTracker={resultTracker}
               evaluateChoice={evaluateChoice}

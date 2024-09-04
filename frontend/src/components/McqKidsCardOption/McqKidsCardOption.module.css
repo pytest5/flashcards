@@ -4,8 +4,10 @@
   align-items: center;
   padding: 15px;
   gap: 15px;
-  border: 1px solid white;
-  border-radius: 8px;
+  border: 1px solid var(--lightest-variation);
+  border-radius: var(--border-radius-3);
+  box-shadow: var(--shadow-2);
+  background-color: var(--lightest-variation);
 }
 
 .disabled {
