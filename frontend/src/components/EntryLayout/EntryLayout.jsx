@@ -6,7 +6,7 @@ import styles from "./EntryLayout.module.css";
 export default function EntryLayout() {
   return (
     <div>
-      <FormNavBar></FormNavBar>
+      {/* <FormNavBar></FormNavBar> */}
       <Outlet />
     </div>
   );
