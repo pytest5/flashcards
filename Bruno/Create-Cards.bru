@@ -1,0 +1,21 @@
+meta {
+  name: Create-Cards
+  type: http
+  seq: 17
+}
+
+post {
+  url: http://localhost:3000/api/subjects/
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDYyOGQ0NzdkYzhlNWY0Y2I5YWJmMiIsImlhdCI6MTcyNTQxMjgzMH0.8X-aFrSczCwgDe-TxliGKz8fH7lHo-uJNud3bk_dxsw
+}
+
+body:json {
+  {
+    "subjectName": "test" 
+  }
+}

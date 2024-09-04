@@ -2,8 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
-import CreateDeckPage from "./pages/CreateDeckPage";
-import CreateCardsPage from "./pages/CreateDeckPage";
+import CreateDeckPage from "./pages/CreateDeckPage/CreateDeckPage";
+import CreateCardsPage from "./pages/CreateCardsPage/CreateCardsPage";
 import DashBoard from "./components/Dashboard/DashBoard";
 import EditDeckForm from "./components/EditDeckForm";
 import StudyLayout from "./components/StudyLayout/StudyLayout";
@@ -36,7 +36,7 @@ function App() {
       </Route>
       <Route path="/decks/new" element={<CreateDeckPage />} />
       <Route path="/decks/:deckId/edit" element={<EditDeckForm />} />
-      <Route path="/decks/:deckId/cards/new" element={<CreateCardsPage />} />
+      <Route path="/decks/:deckId/new" element={<CreateCardsPage />} />
       <Route path="josh/staging" element={<JoshStagingArea />} />
     </Routes>
   );
