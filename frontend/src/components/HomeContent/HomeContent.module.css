@@ -1,3 +1,9 @@
+.homeContentWrapper {
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+}
+
 .container {
   display: flex;
   overflow: auto;
@@ -7,14 +13,40 @@
 .rowBox {
   display: flex;
   min-width: min-content;
-  border: 1px solid black;
-
   border-radius: var(--border-radius-2);
 }
 
-.bigCard {
-  height: 200px;
-  width: 350px;
-  display: grid;
-  place-content: center;
+.deckInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.deckTitle {
+  color: var(--dark-variation);
+  font-size: var(--font-size-4);
+  font-weight: var(--font-weight-2);
+}
+
+.deckDescription {
+  color: var(--medium-variation);
+  font-size: var(--font-size-3);
+  font-weight: var(--font-weight-1);
+}
+
+.bigCardLink {
+  text-decoration: none;
+}
+
+.homeContentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+
+  & .viewMore {
+    color: var(--primary-color);
+    font-size: var(--font-size-2);
+    font-weight: 550;
+    text-decoration: none;
+  }
 }

@@ -1,0 +1,10 @@
+.bigCard {
+  height: 200px;
+  width: 350px;
+  display: grid;
+  place-content: center;
+  border: 1px solid var(--lightest-variation);
+  border-radius: var(--border-radius-3);
+  box-shadow: var(--shadow-3);
+  background-color: var(--lightest-variation);
+}

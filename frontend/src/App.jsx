@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage/HomePage";
+import HomeLayout from "./pages/HomeLayout/HomeLayout";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import CreateDeckPage from "./pages/CreateDeckPage";
@@ -23,13 +23,13 @@ function App() {
       <Route path="/" element={<LandingPage />} /> {/* styled */}
       <Route path="/signup" element={<SignUpPage />} /> {/* styled */}
       <Route path="/login" element={<LoginPage />} /> {/* styled */}
-      <Route path="/home" element={<HomePage />}>
+      <Route path="/home" element={<HomeLayout />}>
         <Route index element={<HomeContent />} />
         <Route path="dashboard" element={<DashBoard />} />
         <Route path="profile" element={<ProfilePage />} />
       </Route>
       <Route path="/decks/:deckId/session" element={<StudyLayout />}>
-        {/* done */}
+        {/* styled but some functions not done*/}
         <Route index element={<StagingArea />} /> {/* done */}
         <Route path="front-back" element={<FrontBackCard />} />
         <Route path="mcq" element={<McqCard />} /> {/* done */}
