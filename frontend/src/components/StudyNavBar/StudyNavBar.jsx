@@ -17,12 +17,12 @@ export default function StudyNavBar({ step, length, resetProgress }) {
     <nav>
       <div className={styles.studyNavBarTop}>
         {isAtStagingPath ? (
-          <Link>
-            <IoMdArrowBack color="white" />
+          <Link to="/home">
+            <IoMdArrowBack size={20} color={"var(--dark-variation)"} />
           </Link>
         ) : (
-          <Link to="./" onClick={resetProgress}>
-            <RxCross2 color="white" />
+          <Link to={-1} onClick={resetProgress}>
+            <RxCross2 size={20} color={"var(--dark-variation)"} />
           </Link>
         )}
         {isAtSessionPath && (
@@ -30,11 +30,11 @@ export default function StudyNavBar({ step, length, resetProgress }) {
             {step + 1}/{length}
           </div>
         )}
-        <BsThreeDots />
+        <BsThreeDots color={"var(--dark-variation)"} />
       </div>
       <div>
         {isAtSessionPath && (
-          <FlashCardProgressBar step={step} length={length} />
+          <FlashCardProgressBar size={20} step={step} length={length} />
         )}
       </div>
     </nav>

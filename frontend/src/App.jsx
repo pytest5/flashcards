@@ -24,7 +24,7 @@ function App() {
       <Route path="/signup" element={<SignUpPage />} /> {/* styled */}
       <Route path="/login" element={<LoginPage />} /> {/* styled */}
       <Route path="/home" element={<HomeLayout />}>
-        <Route index element={<HomeContent />} />
+        <Route index element={<HomeContent />} /> {/* styled */}
         <Route path="dashboard" element={<DashBoard />} />
         <Route path="profile" element={<ProfilePage />} />
       </Route>
