@@ -12,7 +12,7 @@ function DoughnutChart({ chartData }) {
       {
         label: "My First Dataset",
         data: [chartData.correct, chartData.wrong],
-        backgroundColor: ["#06d6a0", "rgb(255, 99, 132)"],
+        backgroundColor: ["#84a59d", "#f28482"],
         hoverOffset: 4,
       },
     ],
@@ -25,8 +25,8 @@ function DoughnutChart({ chartData }) {
       const centerY = chart.getDatasetMeta(0).data[0].y;
       //text
       ctx.save(); // save all variables first
-      ctx.font = "bold 40px sans-serif";
-      ctx.fillStyle = "black";
+      ctx.font = "bold 24px sans-serif";
+      ctx.fillStyle = "hsl(234, 15%, 38%)";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       const percentage =
@@ -47,13 +47,11 @@ function DoughnutChart({ chartData }) {
           plugins: {
             legend: {
               display: true,
-              position: "top", // Set legend position explicitly
+              position: "right", // Set legend position explicitly
               labels: {
                 color: "var(--dark-variation)", // Set label color
                 font: {
-                  size: 16, // Set font size for legend labels
-                  family:
-                    "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
+                  size: 14, // Set font size for legend labels
                 },
               },
             },

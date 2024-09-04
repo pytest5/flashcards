@@ -1,6 +1,7 @@
 import React from "react";
 import { getAudioUrl } from "../../services/textToSpeechService";
 import McqKidsCardOption from "../McqKidsCardOption/McqKidsCardOption";
+import CustomButton from "../CustomButton/CustomButton";
 import { useOutletContext } from "react-router-dom";
 import { Button, ListBox, ListBoxItem } from "react-aria-components";
 import styles from "./McqKidsCard.module.css";
@@ -79,9 +80,7 @@ export default function McqKidsCard() {
       ) : (
         <Button onPress={handleAddStep}>Continue</Button>
       )} */}
-      <Button className={styles.mcqContinueBtn} onPress={handleClickContinue}>
-        Continue
-      </Button>
+      <CustomButton onPress={handleClickContinue}>Continue</CustomButton>
     </div>
   );
 }

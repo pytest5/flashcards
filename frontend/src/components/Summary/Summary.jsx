@@ -1,13 +1,11 @@
 import React from "react";
-import { Link, useNavigate, useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import styles from "./Summary.module.css";
-import { Button } from "react-aria-components";
 import DoughnutChart from "../DoughnutChart/DoughnutChart";
+import CustomButton from "../CustomButton/CustomButton";
 
 export default function Summary() {
   const { score } = useOutletContext();
-  const navigate = useNavigate();
-
   return (
     <div>
       <h1 className={styles.summaryHeader}>You're learning!</h1>
@@ -17,18 +15,12 @@ export default function Summary() {
       <DoughnutChart chartData={score} />
       <div className={styles.actions}>
         <Link to="/home">
-          <Button className={styles.summaryBtn}>Back to home</Button>
+          <CustomButton>Back to home</CustomButton>
         </Link>
         <Link to="../">
-          <Button className={`${styles.summaryBtn} ${styles.secondary}`}>
-            Try again!!
-          </Button>
+          <CustomButton variant="secondary">Try again!!</CustomButton>
         </Link>
       </div>
     </div>
   );
 }
-
-// check if user got correct or wrong
-
-// show summary
