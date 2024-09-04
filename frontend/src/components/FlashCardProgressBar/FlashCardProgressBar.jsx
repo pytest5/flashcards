@@ -7,11 +7,9 @@ export default function FlashCardProgressBar({ step, length }) {
   return (
     <ProgressBar className={styles["react-aria-ProgressBar"]} value={value}>
       {({ percentage }) => (
-        <>
-          <div className={styles.bar}>
-            <div className={styles.fill} style={{ width: percentage + "%" }} />
-          </div>
-        </>
+        <div className={styles.bar}>
+          <div className={styles.fill} style={{ width: percentage + "%" }} />
+        </div>
       )}
     </ProgressBar>
   );

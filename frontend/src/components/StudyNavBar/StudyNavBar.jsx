@@ -14,7 +14,7 @@ export default function StudyNavBar({ step, length, resetProgress }) {
   const isAtSessionPath = sessionPaths.includes(currPath);
 
   return (
-    <nav>
+    <nav className={styles.studyNavBarWrapper}>
       <div className={styles.studyNavBarTop}>
         {isAtStagingPath ? (
           <Link to="/home">

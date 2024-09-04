@@ -56,6 +56,7 @@ export default function StudyLayout() {
           step,
           answer,
           options,
+          length,
           handleAddStep,
           score,
           tallyScore,
