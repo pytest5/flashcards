@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../services/userService";
 import styles from "./LoginPage.module.css";
+import FormContainer from "../../components/FormContainer/FormContainer";
 
 export default function LoginPage() {
   const {
@@ -21,8 +22,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className={styles.formContainer}>
-      <h1 className={styles.formHeader}>Welcome Back!</h1>
+    <FormContainer header="Welcome Back!" to={"/"}>
       <form className={styles.formWrapper} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.formControl}>
           <label>Email:</label>
@@ -39,6 +39,6 @@ export default function LoginPage() {
           value="Login"
         />
       </form>
-    </div>
+    </FormContainer>
   );
 }

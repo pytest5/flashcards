@@ -22,10 +22,8 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} /> {/* styled */}
-      <Route element={<EntryLayout />}>
-        <Route path="/signup" element={<SignUpPage />} /> {/* styled */}
-        <Route path="/login" element={<LoginPage />} /> {/* styled */}
-      </Route>
+      <Route path="/signup" element={<SignUpPage />} /> {/* styled */}
+      <Route path="/login" element={<LoginPage />} /> {/* styled */}
       {/* styled */}
       <Route path="/home" element={<HomeLayout />}>
         <Route index element={<HomeContent />} /> {/* styled */}
