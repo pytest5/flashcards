@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { getCurrentUserDecks } from "../../services/deckService";
 import { ListBox, ListBoxItem } from "react-aria-components";
 import BigCard from "../BigCard/BigCard";
+import CardCarousel from "../CardCarousel/CardCarousel";
 
 export default function HomeContent() {
   const [decks, setDecks] = React.useState();
@@ -28,41 +29,28 @@ export default function HomeContent() {
         </div>
         <div>X Y Z</div>
       </section>
-      <section className={styles.homeContentSession}>
+      <div className={styles.homeContentSession}>
         <div className={styles.homeContentHeader}>
           <h3>Your Decks</h3>
           <Link className={styles.viewMore} to="dashboard">
             View more
           </Link>
         </div>
-        <ListBox
+        <CardCarousel
           items={decks}
-          aria-label="Deck list"
-          className={styles.container}
-        >
-          {(item) => (
-            <ListBoxItem
-              id={item._id}
-              textValue="Deck details"
-              className={styles.rowBox}
+          bigCardContents={(item) => (
+            <Link
+              style={{ textDecoration: "none" }}
+              to={`../decks/${item._id}/session`}
             >
-              <Link
-                className={styles.bigCardLink}
-                to={`../decks/${item._id}/session`}
-              >
-                <BigCard>
-                  <div className={styles.deckInfo}>
-                    <div className={styles.deckTitle}>{item.deckName}</div>
-                    <div className={styles.deckDescription}>
-                      {item.description}
-                    </div>
-                  </div>
-                </BigCard>
-              </Link>
-            </ListBoxItem>
+              <div className={styles.deckInfo}>
+                <div className={styles.deckTitle}>{item.deckName}</div>
+                <div className={styles.deckDescription}>{item.description}</div>
+              </div>
+            </Link>
           )}
-        </ListBox>
-      </section>
+        />
+      </div>
     </div>
   );
 }

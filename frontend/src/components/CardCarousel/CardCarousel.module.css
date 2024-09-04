@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  overflow: auto;
+  gap: 28px;
+  padding-bottom: var(--spacing-5);
+}
+
+.rowBox {
+  display: flex;
+  min-width: min-content;
+  border: 1px solid white;
+  border-radius: var(--border-radius);
+}

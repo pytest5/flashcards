@@ -4,14 +4,7 @@
   --border-radius: 8px;
 }
 
-.container {
-  display: flex;
-  overflow: auto;
-  gap: 15px;
-  padding-bottom: var(--spacing-5);
-}
-
-.rowBox {
+/* .rowBox {
   display: flex;
   min-width: min-content;
   border: 1px solid white;
@@ -27,6 +20,13 @@
   border-radius: var(--border-radius-3);
   box-shadow: var(--shadow-3);
   background-color: var(--lightest-variation);
+} */
+
+.container {
+  display: flex;
+  overflow: auto;
+  gap: 15px;
+  padding-bottom: var(--spacing-5);
 }
 
 .column {
