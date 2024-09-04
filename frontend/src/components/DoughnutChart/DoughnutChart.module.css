@@ -1,0 +1,5 @@
+.chart-container {
+  margin: var(--spacing-2) 0px;
+  display: flex;
+  justify-content: center;
+}
