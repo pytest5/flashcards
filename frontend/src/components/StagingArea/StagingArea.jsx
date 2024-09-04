@@ -5,7 +5,8 @@ import { FaRegCirclePlay } from "react-icons/fa6";
 import PlayButtonIcon from "../PlayButtonIcon/PlayButtonIcon";
 import { HiOutlineSpeakerWave } from "react-icons/hi2";
 import { FaRegStar } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { getCardsByDeckId } from "../../services/cardService";
 
 const mockDecks = [
   { id: 1, answer: "花", audioSrc: "www.test.com" },
@@ -20,16 +21,31 @@ const mockFrontBackDecks = [
 ];
 
 export default function StagingArea() {
+  const { deckId } = useParams();
+  const [cards, setCards] = React.useState([]);
+
+  React.useEffect(() => {
+    async function loadDecks() {
+      const fetchedCards = await getCardsByDeckId(deckId);
+      setCards(fetchedCards);
+    }
+    loadDecks();
+  }, [deckId]);
+
+  if (!cards || cards.length === 0) {
+    return <h1>Loading...</h1>;
+  }
+
   return (
     <div className={styles.stagingAreaWrapper}>
       <ListBox
-        items={mockDecks}
+        items={cards}
         className={styles.container}
         aria-label="Deck list"
       >
         {(item) => (
           <ListBoxItem
-            key={item.id}
+            id={item._id}
             className={styles.rowBox}
             textValue="Deck details"
           >
@@ -49,7 +65,7 @@ export default function StagingArea() {
         className={`${styles.container} ${styles.column}`}
       >
         {(item) => (
-          <ListBoxItem key={item.id} className={styles.columnBox}>
+          <ListBoxItem id={item._id} className={styles.columnBox}>
             <div className={styles.smallCard}>
               <span className={styles.smallCardAnswer}>{item.answer}</span>{" "}
               <HiOutlineSpeakerWave /> <FaRegStar />
