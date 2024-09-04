@@ -39,30 +39,21 @@ async function getAll(req, res) {
 }
 
 async function create(req, res) {
-  const currentUserId = req.user.id; // get currentUserId from token
   if (!req.body) res.status(400).json({ error: "Invalid request body" });
   try {
-    const { deckId, ...reqBody } = req.body;
-    const card = await Card.create(reqBody);
-    if (!card) return res.status(404).json({ error: "Error creating card" });
-    // check if user exists
-    const user = await User.findById(currentUserId);
-    console.log(currentUserId);
-    if (!user)
+    const { decks, user } = req.body[0]
+    const isUserInDb = await User.findById(user);
+    if (!isUserInDb)
       return res
         .status(404)
         .json({ error: "Error retrieving current user for card creation" });
-    // check if deck exists
-    const deck = await Deck.findById(deckId);
-    if (!deck)
+    const isDeckInDb = await Deck.findById(decks[0]);
+    if (!isDeckInDb)
       return res.status(404).json({
         error: "Deck not found. Cannot create card with a non existent deck",
       });
-    // add refs
-    card.decks.push(deckId);
-    card.user = currentUserId;
-    await card.save();
-    res.status(201).json(card);
+    const createdCards = await Card.create(req.body);
+    res.status(201).json(createdCards);
   } catch (e) {
     console.error(e);
     res.status(500).json({ error: "Unable to create card" });
