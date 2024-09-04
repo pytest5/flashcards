@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "react-aria-components";
 import styles from "./LandingPage.module.css";
+import CustomButton from "../../components/CustomButton/CustomButton";
 
 export default function LandingPage() {
   return (
@@ -13,14 +14,10 @@ export default function LandingPage() {
       </div>
       <div className={styles.landingActions}>
         <Link to="/signup">
-          <Button className={styles["react-aria-Button"]}>Register</Button>
+          <CustomButton>Register</CustomButton>
         </Link>
         <Link to="/login">
-          <Button
-            className={`${styles["react-aria-Button"]} ${styles.secondary}`}
-          >
-            Log In
-          </Button>
+          <CustomButton variant="secondary">Log In</CustomButton>
         </Link>
       </div>
     </div>

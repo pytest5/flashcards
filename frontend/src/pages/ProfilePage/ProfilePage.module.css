@@ -1,4 +1,42 @@
+.profilePageWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  padding-top: 80px;
+  gap: var(--spacing-6);
+}
+
+.profileGreetings {
+  align-self: start;
+  font-size: 40px;
+}
+
 .profileImage {
+  border-radius: 50%;
+  width: 8rem;
+  height: 8rem;
+  border: 1px solid var(--light-variation);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+}
+
+.profilePageActions {
+  align-self: stretch;
+  margin-top: auto;
+  margin-bottom: 40px;
+}
+
+.profilePageUserInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  font-size: var(--font-size-4);
+}
+
+/* .profileImage {
   font-family: Arial, Helvetica, sans-serif;
   width: 10rem;
   height: 10rem;
@@ -9,16 +47,16 @@
   text-align: center;
   line-height: 10rem;
   margin: 2rem 0;
-}
+} */
 
-.profileFlex {
+/* .profileFlex {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
-}
-
+} */
+/* 
 .myButton {
   align-items: center;
   background-color: #ffffff;
@@ -71,8 +109,4 @@
   box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
   color: rgba(0, 0, 0, 0.65);
   transform: translateY(0);
-}
-
-.navPosition {
-  align-self: flex-end;
-}
+} */
