@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { HiOutlineHome } from "react-icons/hi2";
-import { IoAddCircleOutline } from "react-icons/io5";
 import { IoMdAddCircleOutline } from "react-icons/io";
+import { LuHome } from "react-icons/lu";
 
 import { CgProfile } from "react-icons/cg";
 import styles from "./NavBar.module.css";
@@ -12,13 +12,16 @@ export default function NavBar() {
   return (
     <div className={styles.mainNavBar}>
       <Link to="/home">
-        <HiOutlineHome size={iconSize} />
+        <LuHome className={styles.navBarIcon} size={iconSize} />
       </Link>
       <Link to="/decks/new">
-        <IoMdAddCircleOutline size={iconSize + 1.5} />
+        <IoMdAddCircleOutline
+          className={styles.navBarIcon}
+          size={iconSize + 1.5}
+        />
       </Link>
       <Link to="profile">
-        <CgProfile size={iconSize} />
+        <CgProfile className={styles.navBarIcon} size={iconSize} />
       </Link>
     </div>
   );
