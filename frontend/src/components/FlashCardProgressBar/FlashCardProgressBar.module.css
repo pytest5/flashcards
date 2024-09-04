@@ -5,8 +5,8 @@
   gap: 4px;
 
   --text-color: white;
-  --highlight-background: salmon;
-  --border-color: hsl(6, 46%, 64%);
+  --highlight-background: var(--primary-color);
+  --border-color: var(--light-variation);
   color: var(--text-color);
 
   .bar {
