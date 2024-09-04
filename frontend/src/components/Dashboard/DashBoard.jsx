@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { getCurrentUserDecks } from "../../services/deckService";
-import { GridList, GridListItem, Button } from "react-aria-components";
+import { GridList, GridListItem } from "react-aria-components";
 // import "./Dashboard.module.css";
 import { Link } from "react-router-dom";
+import EditDeckModal from "../EditDeckModal/EditDeckModal";
 
 export default function Dashboard() {
   const [decks, setDecks] = useState([]);
+  const [reload, setReload] = useState(0);
 
   useEffect(() => {
     const onLoad = async () => {
@@ -26,9 +28,7 @@ export default function Dashboard() {
         {decks.map((deck) => (
           <GridListItem key={deck._id} textValue={deck.deckName}>
             <Link to={`/decks/${deck._id}/session`}>{deck.deckName}</Link>
-            <Link to={`/decks/${deck._id}/edit`}>
-              <Button>...</Button>
-            </Link>
+            <EditDeckModal deck={deck} setReload={setReload} reload={reload} />
           </GridListItem>
         ))}
       </GridList>

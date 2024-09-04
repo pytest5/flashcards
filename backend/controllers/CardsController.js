@@ -42,11 +42,14 @@ async function create(req, res) {
   if (!req.body) res.status(400).json({ error: "Invalid request body" });
   try {
     const { decks, user } = req.body[0]
+    if (!decks || !user) {
+      res.status(400).json({ error: "Invalid request body" });
+    }
     const isUserInDb = await User.findById(user);
-    if (!isUserInDb)
+    if (!isUserInDb){
       return res
         .status(404)
-        .json({ error: "Error retrieving current user for card creation" });
+        .json({ error: "Error retrieving current user for card creation" });}
     const isDeckInDb = await Deck.findById(decks[0]);
     if (!isDeckInDb)
       return res.status(404).json({

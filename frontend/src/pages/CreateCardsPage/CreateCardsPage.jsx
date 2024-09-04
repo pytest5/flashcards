@@ -93,6 +93,7 @@ export default function CreateCardsPage() {
           {fields.map((field, index) => (
             <div key={field.id}>
               <div className={styles.formControl}>
+                <h4>Card {index + 1}</h4>
                 <label>Prompt</label>
                 <input {...register(`cards.${index}.front`)} />
                 <label>Answer</label>
@@ -116,7 +117,7 @@ export default function CreateCardsPage() {
           <button
             type="button"
             onClick={() =>
-              append({ front: "", rear: "", isChildFriendly: false })
+              append({ front: "", answer: "", distractorOne: "", distractorTwo: "", idistractorThree: "", sChildFriendly: false })
             }
           >
             Add Card

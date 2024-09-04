@@ -2,7 +2,6 @@ const BASE_URL = "/api/decks";
 
 const HEADERS = {
   "Content-Type": "application/json",
-  // Authorization: `Bearer ${import.meta.env.VITE_BACKEND_HEADER_AUTH}`,
   Authorization: `Bearer ${JSON.parse(localStorage.getItem("jwt"))}`,
 };
 
@@ -24,9 +23,8 @@ const HEADERS = {
 // };
 
 export async function getCurrentUserDecks() {
-  const url = "/api/decks/currentUser";
   try {
-    const response = await fetch(url, { method: "GET", headers: HEADERS });
+    const response = await fetch(`${BASE_URL}/currentUser`, { method: "GET", headers: HEADERS });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
@@ -65,7 +63,6 @@ export const loadDeck = async (deckId) => {
     }
 
     const json = await response.json();
-    console.log(json);
     return json;
   } catch (error) {
     console.error(error.message);
@@ -91,9 +88,9 @@ export const createDeck = async (formData) => {
   }
 };
 
-export const deleteDeck = async (userId) => {
+export const deleteDeck = async (deckId) => {
   try {
-    const response = await fetch(`${BASE_URL}/${userId}`, {
+    const response = await fetch(`${BASE_URL}/${deckId}`, {
       method: "DELETE",
       headers: HEADERS,
     });
@@ -102,16 +99,17 @@ export const deleteDeck = async (userId) => {
     }
 
     const json = await response.json();
+    console.log(json);
     return json;
   } catch (error) {
     console.error(error.message);
   }
 };
 
-export const editDeck = async (userId, formData) => {
+export const editDeck = async (deckId, formData) => {
   const payload = formData;
   try {
-    const response = await fetch(`${BASE_URL}/${userId}`, {
+    const response = await fetch(`${BASE_URL}/${deckId}`, {
       method: "PUT",
       body: JSON.stringify(payload),
       headers: HEADERS,
@@ -121,6 +119,7 @@ export const editDeck = async (userId, formData) => {
     }
 
     const json = await response.json();
+    console.log(json);
     return json;
   } catch (error) {
     console.error(error.message);

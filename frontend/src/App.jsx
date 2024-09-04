@@ -5,7 +5,7 @@ import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import CreateDeckPage from "./pages/CreateDeckPage/CreateDeckPage";
 import CreateCardsPage from "./pages/CreateCardsPage/CreateCardsPage";
 import DashBoard from "./components/Dashboard/DashBoard";
-import EditDeckForm from "./components/EditDeckForm";
+import EditDeckPage from "./pages/EditDeckPage/EditDeckPage";
 import StudyLayout from "./components/StudyLayout/StudyLayout";
 import Summary from "./components/Summary/Summary";
 import FrontBackCard from "./components/FrontBackCard/FrontBackCard";
@@ -38,7 +38,7 @@ function App() {
         <Route path="summary" element={<Summary />} /> {/* styled */}
       </Route>
       <Route path="/decks/new" element={<CreateDeckPage />} />
-      <Route path="/decks/:deckId/edit" element={<EditDeckForm />} />
+      <Route path="/decks/:deckId/edit" element={<EditDeckPage />} />
       <Route path="/decks/:deckId/new" element={<CreateCardsPage />} />
       <Route path="josh/staging" element={<JoshStagingArea />} />
     </Routes>

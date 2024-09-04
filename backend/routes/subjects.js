@@ -15,4 +15,7 @@ router.delete("/:subjectId", SubjectsController.destroy);
 // update subject (** DEV USE ONLY **)
 router.put("/:subjectId", SubjectsController.update);
 
+// get subject
+router.get("/:subjectId", SubjectsController.show);
+
 module.exports = router;

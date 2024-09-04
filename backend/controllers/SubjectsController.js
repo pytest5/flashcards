@@ -62,9 +62,26 @@ async function update(req, res) {
   }
 }
 
+const show = async (req, res) => {
+  const { subjectId } = req.params;
+  if (!subjectId) {
+    return res.status(400).json({ error: "Invalid request." });
+  }
+  try {
+    const subject = await Subject.findById(subjectId);
+    if (subject === null) {
+      return res.status(404).json({ error: "Resource not found" });
+    }
+    res.status(200).json(subject);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   create,
   getAll,
   destroy,
   update,
+  show,
 };

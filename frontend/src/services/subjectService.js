@@ -17,3 +17,19 @@ export const getAllSubjects = async () => {
     console.error(error.message);
   }
 };
+
+export const loadSubject = async (subjectId) => {
+  try {
+    const response = await fetch(`${BASE_URL}/${subjectId}`, {
+      headers: HEADERS,
+    });
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.error(error.message);
+  }
+};

@@ -2,7 +2,6 @@ const BASE_URL = "/api/users";
 
 const HEADERS = {
   "Content-Type": "application/json",
-  // Authorization: `Bearer ${import.meta.env.VITE_BACKEND_HEADER_AUTH}`,
   Authorization: `Bearer ${JSON.parse(localStorage.getItem("jwt"))}`,
 };
 
