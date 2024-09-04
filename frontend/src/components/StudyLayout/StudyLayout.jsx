@@ -8,7 +8,6 @@ export default function StudyLayout() {
   const [step, setStep] = React.useState(0);
   const [score, setScore] = React.useState({ correct: 0, wrong: 0 });
   const [cards, setCards] = React.useState([]);
-
   const { deckId } = useParams();
 
   React.useEffect(() => {

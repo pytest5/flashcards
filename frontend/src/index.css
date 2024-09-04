@@ -36,6 +36,9 @@
   --border-radius-2: 8px; /* Standard radius */
   --border-radius-3: 16px; /* Larger radius */
   --border-radius-4: 50%; /* For circular shapes like profile pictures */
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.1); /* Light shadow */
+  --shadow-2: 0 4px 6px rgba(0, 0, 0, 0.1); /* Medium shadow */
+  --shadow-3: 0 10px 15px rgba(0, 0, 0, 0.1); /* Dark shadow */
 
   isolation: isolate;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;

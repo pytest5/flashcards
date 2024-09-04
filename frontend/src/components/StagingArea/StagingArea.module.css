@@ -1,7 +1,6 @@
 .stagingAreaWrapper {
   display: grid;
   grid-template-rows: auto auto auto 1fr;
-  gap: 15px;
   --border-radius: 8px;
 }
 
@@ -9,6 +8,7 @@
   display: flex;
   overflow: auto;
   gap: 15px;
+  padding-bottom: var(--spacing-5);
 }
 
 .rowBox {
@@ -23,10 +23,15 @@
   width: 350px;
   display: grid;
   place-content: center;
+  border: 1px solid var(--lightest-variation);
+  border-radius: var(--border-radius-3);
+  box-shadow: var(--shadow-3);
+  background-color: var(--lightest-variation);
 }
 
 .column {
   flex-direction: column;
+  padding-bottom: 0px;
 }
 
 .smallCard {
@@ -36,6 +41,10 @@
   display: flex;
   gap: 10px;
   align-items: center;
+  border: 1px solid var(--lightest-variation);
+  border-radius: var(--border-radius-3);
+  box-shadow: var(--shadow-2);
+  background-color: var(--lightest-variation);
 }
 
 .smallCardAnswer {
@@ -44,4 +53,13 @@
 
 .deckInfo {
   text-align: start;
+  margin-bottom: var(--spacing-4);
+}
+
+.secondaryDeckInfo {
+  color: var(--medium-variation);
+}
+
+.playBtnContainer {
+  margin: var(--spacing-5) 0px;
 }
