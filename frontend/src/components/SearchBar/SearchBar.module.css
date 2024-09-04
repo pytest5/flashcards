@@ -1,0 +1,73 @@
+.react-aria-SearchField {
+  display: grid;
+  grid-template-areas: "label input button";
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  width: fit-content;
+  color: var(--dark-variation);
+  width: 100%;
+  --border-color: var(--light-variation);
+  margin-bottom: var(--spacing-4);
+
+  .react-aria-Label {
+    grid-area: label;
+    margin-right: -1.829rem;
+    z-index: 1;
+    width: 1.143rem;
+    height: 1.143rem;
+    border-radius: 1.143rem;
+    font-size: 1.7rem;
+    line-height: 1rem;
+    vertical-align: middle;
+    text-align: center;
+    background: none;
+    color: var(--medium-variation);
+    border: none;
+    padding-left: 10px;
+  }
+
+  .react-aria-Input {
+    grid-area: input;
+    padding: 0.486rem 1.714rem 0.486rem 2.114rem;
+    margin: 0;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    /* background: var(--field-background); */
+    font-size: 1.143rem;
+    color: var(--field-text-color);
+
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-decoration {
+      -webkit-appearance: none;
+    }
+
+    &[data-focused] {
+      outline: 2px solid var(--focus-ring-color);
+      outline-offset: -1px;
+    }
+  }
+
+  .react-aria-Button {
+    grid-area: button;
+    width: 1.143rem;
+    height: 1.143rem;
+    border-radius: 1.143rem;
+    margin-left: -1.429rem;
+    font-size: 0.857rem;
+    line-height: 0.857rem;
+    vertical-align: middle;
+    text-align: center;
+    background: none;
+    color: var(--medium-variation);
+    border: none;
+    padding: 0;
+
+    &[data-pressed] {
+      background: var(--gray-600);
+    }
+  }
+
+  &[data-empty] button {
+    display: none;
+  }
+}

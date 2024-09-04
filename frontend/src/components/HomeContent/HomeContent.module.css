@@ -1,6 +1,11 @@
 .homeContentWrapper {
   display: flex;
-  gap: 15px;
+  gap: var(--spacing-6);
+  flex-direction: column;
+}
+.homeContentSession {
+  display: flex;
+  gap: var(--spacing-3);
   flex-direction: column;
 }
 

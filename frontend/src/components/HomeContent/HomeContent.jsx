@@ -21,14 +21,14 @@ export default function HomeContent() {
 
   return (
     <div className={styles.homeContentWrapper}>
-      <section>
+      <section className={styles.homeContentSession}>
         <div className={styles.homeContentHeader}>
           <h3>Trending Decks</h3>
           <Link className={styles.viewMore}>View more</Link>
         </div>
         <div>X Y Z</div>
       </section>
-      <section>
+      <section className={styles.homeContentSession}>
         <div className={styles.homeContentHeader}>
           <h3>Your Decks</h3>
           <Link className={styles.viewMore} to="dashboard">
