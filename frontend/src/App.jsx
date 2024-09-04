@@ -14,7 +14,6 @@ import McqKidsCard from "./components/McqKidsCard/McqKidsCard";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import StagingArea from "./components/StagingArea/StagingArea";
 import HomeContent from "./components/HomeContent/HomeContent";
-import EntryLayout from "./components/EntryLayout/EntryLayout";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import JoshStagingArea from "./components/Temp/JoshStaging";
 
