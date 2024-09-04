@@ -21,17 +21,24 @@ export default function LoginPage() {
   };
 
   return (
-    <form className={styles.formWrapper} onSubmit={handleSubmit(onSubmit)}>
-      <div className={styles.formControl}>
-        <label>Email:</label>
-        <input type="text" name="email" {...register("email")} />
-      </div>
-      <div className={styles.formControl}>
-        <label>Password:</label>
-        <input type="password" name="password" {...register("password")} />
-      </div>
+    <div className={styles.formContainer}>
+      <h1 className={styles.formHeader}>Welcome Back!</h1>
+      <form className={styles.formWrapper} onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.formControl}>
+          <label>Email:</label>
+          <input type="text" name="email" {...register("email")} />
+        </div>
+        <div className={styles.formControl}>
+          <label>Password:</label>
+          <input type="password" name="password" {...register("password")} />
+        </div>
 
-      <input className={styles.formSubmitButton} type="submit" value="Login" />
-    </form>
+        <input
+          className={styles.formSubmitButton}
+          type="submit"
+          value="Login"
+        />
+      </form>
+    </div>
   );
 }

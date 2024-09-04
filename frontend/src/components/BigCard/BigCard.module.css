@@ -1,6 +1,6 @@
 .bigCard {
   height: 200px;
-  width: 350px;
+  width: 250px;
   display: grid;
   place-content: center;
   border: 1px solid var(--lightest-variation);

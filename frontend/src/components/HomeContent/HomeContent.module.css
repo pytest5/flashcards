@@ -1,12 +1,17 @@
 .homeContentWrapper {
-  display: flex;
+  display: grid;
+  grid-template-rows: auto auto;
   gap: var(--spacing-6);
-  flex-direction: column;
 }
+
 .homeContentSession {
   display: flex;
   gap: var(--spacing-3);
   flex-direction: column;
+  width: 100%;
+  /* overflow: auto; */
+  min-width: 0;
+  border: 1px solid red; /* TODO */
 }
 
 .container {
