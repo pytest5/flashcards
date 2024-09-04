@@ -5,7 +5,7 @@
   gap: 4px;
 
   --text-color: white;
-  --highlight-background: var(--medium-variation);
+  --highlight-background: var(--light-variation);
   --border-color: var(--light-variation);
   color: var(--text-color);
 
