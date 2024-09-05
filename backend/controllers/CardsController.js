@@ -39,9 +39,10 @@ async function getAll(req, res) {
 }
 
 async function create(req, res) {
+  console.log(req.body);
   if (!req.body) res.status(400).json({ error: "Invalid request body" });
   try {
-    const { decks, user } = req.body[0]
+    const { decks, user } = req.body[0];
     const isUserInDb = await User.findById(user);
     if (!isUserInDb)
       return res
@@ -107,12 +108,71 @@ const index = async (req, res) => {
   }
 };
 
+async function updateMany(req, res) {
+  const cardIds = req.body.cardIds;
+  try {
+    const cards = await Card.find({ _id: { $in: cardIds } });
+    if (!cards || cards.length === 0) {
+      res.status(404).json({
+        error: `Could not update: Unable to find cards: ${cardIds}`,
+      });
+    }
+    const result = await Card.updateMany(
+      {
+        _id: { $in: cardIds },
+      },
+      { isChildFriendly: false }
+    );
+    if (!result)
+      return res.status(404).json({ error: "Unable to update cards." });
+    res.status(201).json(result);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: "Unable to update cards" });
+  }
+}
+
+async function destroyMany(req, res) {
+  const cardIds = req.body.cardIds;
+  try {
+    const cards = await Card.find({ _id: { $in: cardIds } });
+    if (!cards || cards.length === 0) {
+      res.status(404).json({
+        error: `Could not delete: Unable to find cards: ${cardIds}`,
+      });
+    }
+    const result = await Card.deleteMany({ _id: { $in: cardIds } });
+    if (!result)
+      return res.status(404).json({ error: "Unable to delete cards." });
+    res.status(204).json(result);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: "Unable to update cards" });
+  }
+}
+
+async function createMany(req, res) {
+  const toBeCreatedCards = req.body.toBeCreatedCards;
+  try {
+    const result = await Card.insertMany(toBeCreatedCards);
+    if (!result)
+      return res.status(404).json({ error: "Unable to create cards." });
+    res.status(201).json(result);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: "Unable to create cards" });
+  }
+}
+
 module.exports = {
   create,
+  createMany,
   getAll,
   getByCardId,
   getAllByCurrentUserId,
   destroy,
+  destroyMany,
   update,
+  updateMany,
   index,
 };
