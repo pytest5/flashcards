@@ -18,20 +18,20 @@ export default function StudyLayout() {
     loadCards();
   }, [deckId]);
 
-  if (!cards || cards.length === 0) {
-    return <h1>Loading...</h1>;
-  }
+  // if (cards.length === 0) {
+  //   return <h1>Deck is empty</h1>;
+  // }
 
-  const sessionData = cards.map((i) => ({
+  const sessionData = cards?.map((i) => ({
     ...i,
     options: [...i.distractors, i.answer],
     isCorrect: null,
     isGuessed: false,
   }));
 
-  const answer = sessionData[step].answer;
-  const options = sessionData[step].options;
-  const length = sessionData.length;
+  const answer = sessionData[step]?.answer || 0;
+  const options = sessionData[step]?.options || 0;
+  const length = sessionData?.length || 0;
 
   function handleAddStep() {
     if (step === length - 1) return;

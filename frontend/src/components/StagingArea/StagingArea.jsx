@@ -7,12 +7,6 @@ import { loadDeck } from "../../services/deckService";
 import CardCarousel from "../CardCarousel/CardCarousel";
 import CardCarouselVertical from "../CardCarouselVertical/CardCarouselVertical";
 
-// const mockFrontBackDecks = [
-//   { id: 1, front: "React", back: "react is a framework" },
-//   { id: 2, front: "Javascript", back: "javascript is a lauguage" },
-//   { id: 3, front: "array.filter", back: "array.filter is non-mutating" },
-// ];
-
 export default function StagingArea() {
   const { deckId } = useParams();
   const [cards, setCards] = React.useState([]);
@@ -30,15 +24,24 @@ export default function StagingArea() {
     loadDeckInfo();
   }, [deckId]);
 
-  if (!cards || cards.length === 0 || !deckInfo) {
+  if (!cards || !deckInfo) {
     return <h1>Loading...</h1>;
   }
+
+  const isDeckEmpty = cards.length === 0;
 
   return (
     <div className={styles.stagingAreaWrapper}>
       <CardCarousel items={cards} />
       <div className={styles.playBtnContainer}>
-        <PlayButtonIcon color={"var(--primary-color)"} />
+        {isDeckEmpty ? (
+          <div>
+            The deck currently has no cards. Please add cards using the menu
+            (three dots) above.
+          </div>
+        ) : (
+          <PlayButtonIcon color={"var(--primary-color)"} />
+        )}
       </div>
       <section className={styles.deckInfo}>
         <h2>{deckInfo.deckName}</h2>
