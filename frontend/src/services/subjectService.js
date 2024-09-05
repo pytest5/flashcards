@@ -1,15 +1,13 @@
 const BASE_URL = "/api/subjects";
 
-const HEADERS = () => {
-    return {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem("jwt"))}`,
-    };
+const HEADERS = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${JSON.parse(localStorage.getItem("jwt"))}`,
   };
 
 export const getAllSubjects = async () => {
   try {
-    const response = await fetch(BASE_URL, { method: "GET", headers: HEADERS() });
+    const response = await fetch(BASE_URL, { method: "GET", headers: HEADERS });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
