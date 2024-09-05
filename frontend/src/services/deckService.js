@@ -1,9 +1,10 @@
 const BASE_URL = "/api/decks";
 
-const HEADERS = {
-  "Content-Type": "application/json",
-  // Authorization: `Bearer ${import.meta.env.VITE_BACKEND_HEADER_AUTH}`,
-  Authorization: `Bearer ${JSON.parse(localStorage.getItem("jwt"))}`,
+const HEADERS = () => {
+  return {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${JSON.parse(localStorage.getItem("jwt"))}`,
+  };
 };
 
 // export const getDecksByUserId = async (userId) => {
@@ -26,12 +27,11 @@ const HEADERS = {
 export async function getCurrentUserDecks() {
   const url = "/api/decks/currentUser";
   try {
-    const response = await fetch(url, { method: "GET", headers: HEADERS });
+    const response = await fetch(url, { method: "GET", headers: HEADERS() });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
     const json = await response.json();
-    console.log(json);
     return json;
   } catch (error) {
     console.error(error.message);
@@ -42,7 +42,7 @@ export const getDecksBySubject = async (subject) => {
   const appendQuery = `?subject=${subject}`;
   try {
     const response = await fetch(BASE_URL + appendQuery, {
-      headers: HEADERS,
+      headers: HEADERS(),
     });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
@@ -58,7 +58,7 @@ export const getDecksBySubject = async (subject) => {
 export const loadDeck = async (deckId) => {
   try {
     const response = await fetch(`${BASE_URL}/${deckId}`, {
-      headers: HEADERS,
+      headers: HEADERS(),
     });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
@@ -78,7 +78,7 @@ export const createDeck = async (formData) => {
     const response = await fetch(BASE_URL, {
       method: "POST",
       body: JSON.stringify(payload),
-      headers: HEADERS,
+      headers: HEADERS(),
     });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
@@ -95,7 +95,7 @@ export const deleteDeck = async (userId) => {
   try {
     const response = await fetch(`${BASE_URL}/${userId}`, {
       method: "DELETE",
-      headers: HEADERS,
+      headers: HEADERS(),
     });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
@@ -114,7 +114,7 @@ export const editDeck = async (userId, formData) => {
     const response = await fetch(`${BASE_URL}/${userId}`, {
       method: "PUT",
       body: JSON.stringify(payload),
-      headers: HEADERS,
+      headers: HEADERS(),
     });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);

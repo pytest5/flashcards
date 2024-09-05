@@ -4,8 +4,9 @@ import NavBar from "../../components/NavBar/NavBar";
 import { getCurrentUser } from "../../services/userService";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../../services/userService";
 
-export default function ProfilePage() {
+export default function ProfilePage({ setToken }) {
   const [user, setUser] = React.useState();
   const navigate = useNavigate();
 
@@ -23,6 +24,7 @@ export default function ProfilePage() {
 
   const handleLogout = () => {
     localStorage.removeItem("jwt");
+    setToken("");
     setUser();
     navigate("/");
   };
