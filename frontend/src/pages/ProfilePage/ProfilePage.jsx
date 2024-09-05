@@ -1,12 +1,13 @@
 import React from "react";
-import { Button } from "react-aria-components";
 import styles from "./ProfilePage.module.css";
 import NavBar from "../../components/NavBar/NavBar";
 import { getCurrentUser } from "../../services/userService";
 import CustomButton from "../../components/CustomButton/CustomButton";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfilePage() {
   const [user, setUser] = React.useState();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     async function loadUser() {
@@ -20,6 +21,12 @@ export default function ProfilePage() {
     return <h1>Loading...</h1>;
   }
 
+  const handleLogout = () => {
+    localStorage.removeItem("jwt");
+    setUser();
+    navigate("/login");
+  };
+
   return (
     <div className={styles.profilePageWrapper}>
       {/* <h1 className={styles.profileGreetings}>Halo {user.userName}!</h1> */}
@@ -29,7 +36,7 @@ export default function ProfilePage() {
       </div>
 
       <div className={styles.profilePageActions}>
-        <CustomButton>Logout</CustomButton>
+        <CustomButton onPress={() => handleLogout()}>Logout</CustomButton>
         <CustomButton variant="secondary">Delete</CustomButton>
       </div>
     </div>
