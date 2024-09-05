@@ -1,17 +1,15 @@
 const BASE_URL = "/api/users";
 
-const HEADERS = () => {
-  return {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${JSON.parse(localStorage.getItem("jwt"))}`,
-  };
+const HEADERS = {
+  "Content-Type": "application/json",
+  Authorization: `Bearer ${JSON.parse(localStorage.getItem("jwt"))}`,
 };
 
 export async function getCurrentUser() {
   try {
     const response = await fetch(`${BASE_URL}/currentUser`, {
       method: "GET",
-      headers: HEADERS(),
+      headers: HEADERS,
     });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
@@ -26,7 +24,7 @@ export async function getCurrentUser() {
 export const getUserById = async (userId) => {
   try {
     const response = await fetch(`${BASE_URL}/${userId}`, {
-      headers: HEADERS(),
+      headers: HEADERS,
     });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
@@ -45,7 +43,7 @@ export const createUser = async (formData) => {
     const response = await fetch(BASE_URL, {
       method: "POST",
       body: JSON.stringify(payload),
-      headers: HEADERS(),
+      headers: HEADERS,
     });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
@@ -61,7 +59,7 @@ export const deleteUser = async (userId) => {
   try {
     const response = await fetch(`${BASE_URL}/${userId}`, {
       method: "DELETE",
-      headers: HEADERS(),
+      headers: HEADERS,
     });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
@@ -77,7 +75,7 @@ export const login = async (data) => {
   try {
     const response = await fetch(`${BASE_URL}/login`, {
       method: "POST",
-      headers: HEADERS(),
+      headers: HEADERS,
       body: JSON.stringify(data),
     });
     if (!response.ok) {
@@ -95,7 +93,7 @@ export const logout = async () => {
   try {
     const response = await fetch(`${BASE_URL}/logout`, {
       method: "GET",
-      headers: HEADERS(),
+      headers: HEADERS,
     });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
