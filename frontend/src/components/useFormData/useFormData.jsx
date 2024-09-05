@@ -8,6 +8,7 @@ import { getAllSubjects } from "../../services/subjectService";
 
 export default function useFormData(deckId) {
   const [data, setData] = React.useState({});
+  const [originalCardIds, setOriginalCardIds] = React.useState();
   React.useEffect(() => {
     const onLoad = async () => {
       const promises = [
@@ -16,7 +17,9 @@ export default function useFormData(deckId) {
         getAllSubjects(),
       ];
       const result = await Promise.all(promises);
-      console.log(result);
+      const fetchedCards = await getCardsByDeckId(deckId);
+      const ids = fetchedCards.map((i) => i._id);
+      setOriginalCardIds(ids);
       const [deck, cards, subjects] = result;
       setData({
         deck,
@@ -27,5 +30,5 @@ export default function useFormData(deckId) {
     onLoad();
   }, [deckId]);
 
-  return [data];
+  return [data, originalCardIds];
 }
