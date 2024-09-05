@@ -8,6 +8,7 @@ import {
   updateManyCards,
 } from "../../services/cardService";
 import { useParams } from "react-router-dom";
+import styles from "./DynamicForm.module.css";
 
 export default function DynamicForm() {
   const { deckId } = useParams();
@@ -73,11 +74,11 @@ export default function DynamicForm() {
   //   console.log("error object:", errors);
 
   return (
-    <FormContainer header="Editing deck" to="/home">
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <FormContainer header="Editing deck" to="/home" style={{ height: "100%" }}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
         {fields.map((i, idx) => {
           return (
-            <section key={i.id}>
+            <section key={i.id} className={styles.dynamicSection}>
               {/* 0. ID */}
               <input type="hidden" {...register(`cards.${idx}._id`)} />
               {/* 1. PROMPT */}
@@ -137,7 +138,7 @@ export default function DynamicForm() {
           Append
         </button>
         <p>{errors.cards?.root?.message}</p>
-        <input type="submit" />
+        <input type="submit" className={styles.formSubmitButton} />
       </form>
     </FormContainer>
   );
