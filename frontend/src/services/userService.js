@@ -1,16 +1,17 @@
 const BASE_URL = "/api/users";
 
-const HEADERS = {
-  "Content-Type": "application/json",
-  // Authorization: `Bearer ${import.meta.env.VITE_BACKEND_HEADER_AUTH}`,
-  Authorization: `Bearer ${JSON.parse(localStorage.getItem("jwt"))}`,
+const HEADERS = () => {
+  return {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${JSON.parse(localStorage.getItem("jwt"))}`,
+  };
 };
 
 export async function getCurrentUser() {
   try {
     const response = await fetch(`${BASE_URL}/currentUser`, {
       method: "GET",
-      headers: HEADERS,
+      headers: HEADERS(),
     });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
@@ -25,7 +26,7 @@ export async function getCurrentUser() {
 export const getUserById = async (userId) => {
   try {
     const response = await fetch(`${BASE_URL}/${userId}`, {
-      headers: HEADERS,
+      headers: HEADERS(),
     });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
@@ -44,7 +45,7 @@ export const createUser = async (formData) => {
     const response = await fetch(BASE_URL, {
       method: "POST",
       body: JSON.stringify(payload),
-      headers: HEADERS,
+      headers: HEADERS(),
     });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
@@ -60,7 +61,7 @@ export const deleteUser = async (userId) => {
   try {
     const response = await fetch(`${BASE_URL}/${userId}`, {
       method: "DELETE",
-      headers: HEADERS,
+      headers: HEADERS(),
     });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
@@ -76,7 +77,7 @@ export const login = async (data) => {
   try {
     const response = await fetch(`${BASE_URL}/login`, {
       method: "POST",
-      headers: HEADERS,
+      headers: HEADERS(),
       body: JSON.stringify(data),
     });
     if (!response.ok) {
@@ -85,6 +86,22 @@ export const login = async (data) => {
     const token = await response.json();
     localStorage.setItem("jwt", JSON.stringify(token));
     return token;
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
+export const logout = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/logout`, {
+      method: "GET",
+      headers: HEADERS(),
+    });
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const result = await response.json();
+    return result;
   } catch (error) {
     console.error(error.message);
   }

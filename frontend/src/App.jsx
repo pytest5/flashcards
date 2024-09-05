@@ -1,4 +1,5 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
+import { useState } from "react";
 import HomeLayout from "./pages/HomeLayout/HomeLayout";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
@@ -18,30 +19,40 @@ import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import JoshStagingArea from "./components/Temp/JoshStaging";
 
 function App() {
+  const [token, setToken] = useState("");
+
   return (
-    <Routes>
-      <Route path="/" element={<LandingPage />} /> {/* styled */}
-      <Route path="/signup" element={<SignUpPage />} /> {/* styled */}
-      <Route path="/login" element={<LoginPage />} /> {/* styled */}
-      {/* styled */}
-      <Route path="/home" element={<HomeLayout />}>
-        <Route index element={<HomeContent />} /> {/* styled */}
-        <Route path="dashboard" element={<DashBoard />} />
-        <Route path="profile" element={<ProfilePage />} />
-      </Route>
-      <Route path="/decks/:deckId/session" element={<StudyLayout />}>
-        {/* styled but some functions not done*/}
-        <Route index element={<StagingArea />} /> {/* done */}
-        <Route path="front-back" element={<FrontBackCard />} />
-        <Route path="mcq" element={<McqCard />} /> {/* done */}
-        <Route path="mcq-kids" element={<McqKidsCard />} />
-        <Route path="summary" element={<Summary />} /> {/* styled */}
-      </Route>
-      <Route path="/decks/new" element={<CreateDeckPage />} />
-      <Route path="/decks/:deckId/edit" element={<EditDeckForm />} />
-      <Route path="/decks/:deckId/new" element={<CreateCardsPage />} />
-      <Route path="josh/staging" element={<JoshStagingArea />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<LandingPage />} /> {/* styled */}
+        <Route path="/signup" element={<SignUpPage />} /> {/* styled */}
+        <Route path="/login" element={<LoginPage setToken={setToken} />} /> {/* styled */}
+        {/* styled */}
+        {/* <Route path="*" element={<Navigate to="/" />} ></Route> */}
+      </Routes>
+
+      {token === "" ? null : (
+        <Routes>
+          <Route path="/home" element={<HomeLayout />}>
+            <Route index element={<HomeContent />} /> {/* styled */}
+            <Route path="dashboard" element={<DashBoard />} />
+            <Route path="profile" element={<ProfilePage setToken={setToken} />} />
+          </Route>
+          <Route path="/decks/:deckId/session" element={<StudyLayout />}>
+            {/* styled but some functions not done*/}
+            <Route index element={<StagingArea />} /> {/* done */}
+            <Route path="front-back" element={<FrontBackCard />} />
+            <Route path="mcq" element={<McqCard />} /> {/* done */}
+            <Route path="mcq-kids" element={<McqKidsCard />} />
+            <Route path="summary" element={<Summary />} /> {/* styled */}
+          </Route>
+          <Route path="/decks/new" element={<CreateDeckPage />} />
+          <Route path="/decks/:deckId/edit" element={<EditDeckForm />} />
+          <Route path="/decks/:deckId/new" element={<CreateCardsPage />} />
+          <Route path="josh/staging" element={<JoshStagingArea />} />
+        </Routes>
+      )}
+    </>
   );
 }
 

@@ -10,5 +10,6 @@ router.get("/", verifyToken, UsersController.index);
 router.get("/:userId", verifyToken, UsersController.show);
 router.delete("/:userId", verifyToken, UsersController.destroy);
 router.put("/:userId", verifyToken, UsersController.update);
+router.get("/logout", verifyToken, UsersController.logout);
 
 module.exports = router;

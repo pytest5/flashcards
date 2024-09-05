@@ -4,7 +4,7 @@ import { login } from "../../services/userService";
 import styles from "./LoginPage.module.css";
 import FormContainer from "../../components/FormContainer/FormContainer";
 
-export default function LoginPage() {
+export default function LoginPage({ setToken }) {
   const {
     register,
     handleSubmit,
@@ -13,9 +13,8 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   const onSubmit = async (formData) => {
-    console.log(formData);
     const token = await login(formData);
-    console.log(token);
+    setToken(token);
     if (token) {
       navigate("/home");
     }
