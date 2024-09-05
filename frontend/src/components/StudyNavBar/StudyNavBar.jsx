@@ -3,7 +3,7 @@ import { RxCross2 } from "react-icons/rx";
 import { IoMdArrowBack } from "react-icons/io";
 import { BsThreeDots } from "react-icons/bs";
 import styles from "./StudyNavBar.module.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import FlashCardProgressBar from "../FlashCardProgressBar/FlashCardProgressBar";
 
 export default function StudyNavBar({ step, length, resetProgress }) {
@@ -12,7 +12,7 @@ export default function StudyNavBar({ step, length, resetProgress }) {
   const sessionPaths = ["mcq-kids", "summary", "mcq", "front-back"];
   const isAtStagingPath = currPath === "session";
   const isAtSessionPath = sessionPaths.includes(currPath);
-
+  const navigate = useNavigate();
   return (
     <nav className={styles.studyNavBarWrapper}>
       <div className={styles.studyNavBarTop}>
@@ -30,7 +30,12 @@ export default function StudyNavBar({ step, length, resetProgress }) {
             {step + 1}/{length}
           </div>
         )}
-        <BsThreeDots color={"var(--dark-variation)"} />
+
+        <BsThreeDots
+          style={{ display: "none" }}
+          onClick={() => navigate("../edit", { relative: "path" })}
+          color={"var(--dark-variation)"}
+        />
       </div>
       <div>
         {isAtSessionPath && (
