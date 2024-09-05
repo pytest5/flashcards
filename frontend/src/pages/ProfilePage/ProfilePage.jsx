@@ -24,7 +24,7 @@ export default function ProfilePage() {
   const handleLogout = () => {
     localStorage.removeItem("jwt");
     setUser();
-    navigate("/login");
+    navigate("/");
   };
 
   return (
