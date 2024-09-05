@@ -6,6 +6,7 @@ import { getAllSubjects } from "../../services/subjectService";
 import { getCurrentUser } from "../../services/userService";
 
 import styles from "./CreateDeckPage.module.css";
+import FormContainer from "../../components/FormContainer/FormContainer";
 
 export default function CreateDeckPage() {
   const [subjects, setSubjects] = useState([]);
@@ -31,7 +32,7 @@ export default function CreateDeckPage() {
     formData.user = user._id;
     const deck = await createDeck(formData);
     if (deck) {
-      deck.type = formData.type
+      deck.type = formData.type;
       navigate(`/decks/${deck._id}/new`, { state: { deck } });
     }
   };
@@ -41,59 +42,66 @@ export default function CreateDeckPage() {
   };
 
   return (
-    <form className={styles.formWrapper} onSubmit={handleSubmit(onSubmit)}>
-      <div className={styles.formControl}>
-        <label>Name</label>
+    <FormContainer header="Create new deck" to="/home">
+      <form className={styles.formWrapper} onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.formControl}>
+          <label>Name</label>
+          <input
+            type="text"
+            name="deckName"
+            {...register("deckName", { required: "Please name your deck" })}
+          />
+        </div>
+        <div className={styles.formControl}>
+          <label>Subject</label>
+          <select
+            className={styles.createFormSelect}
+            name="subject"
+            {...register("subject", { required: "Please select a subject" })}
+          >
+            {subjects
+              ? subjects.map((subject) => (
+                  <option key={subject._id} value={subject._id}>
+                    {upperCaseFirstChar(subject.subjectName)}
+                  </option>
+                ))
+              : ""}
+          </select>
+        </div>
+        <div className={styles.formControl}>
+          <label>Description</label>
+          <input type="text" name="description" {...register("description")} />
+        </div>
+        <div className={styles.formControl}>
+          <label>Visibility</label>
+          <select
+            className={styles.createFormSelect}
+            name="visibility"
+            {...register("visibility", { required: "Please select a choice" })}
+          >
+            <option value="public">Public</option>
+            <option value="private">Private</option>
+          </select>
+        </div>
+        <div className={styles.formControl}>
+          <label>Type</label>
+          <select
+            className={styles.createFormSelect}
+            name="type"
+            {...register("type", {
+              required: "Please select the type of deck",
+            })}
+          >
+            <option value="mcq-kids">MCQ</option>
+            <option value="front-back">Regular</option>
+          </select>
+        </div>
         <input
-          type="text"
-          name="deckName"
-          {...register("deckName", { required: "Please name your deck" })}
+          className={styles.formSubmitButton}
+          type="submit"
+          value="Create Deck (Tick / Submit)"
         />
-      </div>
-      <div className={styles.formControl}>
-        <label>Subject</label>
-        <select
-          name="subject"
-          {...register("subject", { required: "Please select a subject" })}
-        >
-          {subjects
-            ? subjects.map((subject) => (
-                <option key={subject._id} value={subject._id}>
-                  {upperCaseFirstChar(subject.subjectName)}
-                </option>
-              ))
-            : ""}
-        </select>
-      </div>
-      <div className={styles.formControl}>
-        <label>Description</label>
-        <input type="text" name="description" {...register("description")} />
-      </div>
-      <div className={styles.formControl}>
-        <label>Visibility</label>
-        <select
-          name="visibility"
-          {...register("visibility", { required: "Please select a choice" })}
-        >
-          <option value="public">Public</option>
-          <option value="private">Private</option>
-        </select>
-      </div>
-      <div className={styles.formControl}>
-        <label>Type</label>
-        <select
-          name="type"
-          {...register("type", { required: "Please select the type of deck" })}
-        >
-          <option value="mcq-kids">MCQ</option>
-          <option value="front-back">Regular</option>
-        </select>
-      </div>
-      <input
-        className={styles.formSubmitButton}
-        type="submit"
-        value="Create Deck (Tick / Submit)"
-      />
-    </form>
+      </form>
+    </FormContainer>
   );
 }
