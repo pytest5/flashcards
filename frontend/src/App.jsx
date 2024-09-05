@@ -30,10 +30,10 @@ function App() {
         {/* styled */}
         {/* styled */}
         {/* <Route path="*" element={<Navigate to="/" />} ></Route> */}
-      </Routes>
+      {/* </Routes> */}
 
-      {token === "" ? null : (
-        <Routes>
+      {/* {token === "" ? null : (
+        <Routes> */}
           <Route path="/home" element={<HomeLayout />}>
             <Route index element={<HomeContent />} /> {/* styled */}
             <Route path="dashboard" element={<DashBoard />} />
@@ -55,7 +55,7 @@ function App() {
           <Route path="/decks/:deckId/new" element={<CreateCardsPage />} />
           <Route path="josh/staging" element={<JoshStagingArea />} />
         </Routes>
-      )}
+      {/* )} */}
     </>
   );
 }
