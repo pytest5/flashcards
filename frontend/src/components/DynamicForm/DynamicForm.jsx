@@ -7,12 +7,13 @@ import {
   deleteManyCards,
   updateManyCards,
 } from "../../services/cardService";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "./DynamicForm.module.css";
 
 export default function DynamicForm() {
+  const navigate = useNavigate();
   const { deckId } = useParams();
-  const [{ cards, deck, subjects }, originalCardIds] = useFormData(deckId);
+  const [{ cards }, originalCardIds] = useFormData(deckId);
   const [toBeDeleted, setToBeDeleted] = React.useState([]);
   const [toBeEdited, setToBeEdited] = React.useState([]);
 
@@ -35,6 +36,8 @@ export default function DynamicForm() {
         prompt: i.front,
         answer: i.answer,
         distractors: ["", ""],
+        isChildFriendly: "yes",
+        isPublic: "yes",
       })),
     },
   });
@@ -47,6 +50,8 @@ export default function DynamicForm() {
         prompt: i.front,
         answer: i.answer,
         distractors: i.distractors || [],
+        isChildFriendly: i.isChildFriendly || "yes",
+        isPublic: i.isPublic || "yes",
       })),
     });
   }, [cards, reset]);
@@ -61,13 +66,18 @@ export default function DynamicForm() {
 
   const onSubmit = async (data) => {
     console.log("submitted data!!!: ", data.cards);
-    const toBeCreated = data.cards
+    const toBeCreatedCards = data.cards
       .filter((i) => !i._id)
       .map((i) => ({ ...i, deckId }));
-    if (toBeCreated.length) await createManyCards(toBeCreated, deckId);
+    const toBeEditedCards = data.cards.filter((c) =>
+      toBeEdited.includes(c._id)
+    );
+    if (toBeCreatedCards.length)
+      await createManyCards(toBeCreatedCards, deckId);
     if (toBeDeleted.length) await deleteManyCards(toBeDeleted);
-    if (toBeEdited.length) await updateManyCards(toBeEdited);
-    console.log({ toBeCreated, toBeDeleted, toBeEdited });
+    if (toBeEdited.length) await updateManyCards(toBeEditedCards, deckId);
+    navigate("../session", { relative: "path" });
+    console.log({ toBeCreatedCards, toBeDeleted, toBeEditedCards });
   };
   //   console.log("cards", cards);
   //   console.log("FIELDS", fields);
@@ -112,6 +122,20 @@ export default function DynamicForm() {
                   <p>{errors.cards?.[idx]?.distractors?.[index]?.message}</p>
                 </div>
               ))}
+              {/* 4. ISCHILDFRIENDLY */}
+              <label>Is Child Friendly</label>
+              <select {...register(`cards.${idx}.isChildFriendly`)}>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+              <p>{errors.cards?.[idx]?.isChildFriendly?.message}</p>
+              {/* 5. ISPUBLIC */}
+              <label>Is Public</label>
+              <select {...register(`cards.${idx}.isPublic`)}>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+              <p>{errors.cards?.[idx]?.isPublic?.message}</p>
               <button
                 type="button"
                 onClick={() => {
