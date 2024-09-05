@@ -41,6 +41,10 @@ async function getAll(req, res) {
 async function create(req, res) {
   console.log(req.body);
   if (!req.body) res.status(400).json({ error: "Invalid request body" });
+  if (!req.body.deckId)
+    res
+      .status(400)
+      .json({ error: "Please provide a deckId when creating card" });
   try {
     const { decks, user } = req.body[0];
     const isUserInDb = await User.findById(user);
@@ -99,9 +103,6 @@ const index = async (req, res) => {
   const { query } = req;
   try {
     const cards = await Card.find(query).populate("decks").exec();
-    if (cards.length === 0) {
-      return res.status(404).json({ error: "Resource not found" });
-    }
     res.status(200).json(cards);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -109,11 +110,12 @@ const index = async (req, res) => {
 };
 
 async function updateMany(req, res) {
-  const cardIds = req.body.cardIds;
+  const cardIds = req.body;
+  console.log(cardIds);
   try {
     const cards = await Card.find({ _id: { $in: cardIds } });
     if (!cards || cards.length === 0) {
-      res.status(404).json({
+      return res.status(404).json({
         error: `Could not update: Unable to find cards: ${cardIds}`,
       });
     }
@@ -121,10 +123,11 @@ async function updateMany(req, res) {
       {
         _id: { $in: cardIds },
       },
-      { isChildFriendly: false }
+      { isChildFriendly: true }
     );
-    if (!result)
+    if (!result) {
       return res.status(404).json({ error: "Unable to update cards." });
+    }
     res.status(201).json(result);
   } catch (e) {
     console.error(e);
@@ -133,7 +136,7 @@ async function updateMany(req, res) {
 }
 
 async function destroyMany(req, res) {
-  const cardIds = req.body.cardIds;
+  const cardIds = req.body;
   try {
     const cards = await Card.find({ _id: { $in: cardIds } });
     if (!cards || cards.length === 0) {
@@ -152,9 +155,11 @@ async function destroyMany(req, res) {
 }
 
 async function createMany(req, res) {
-  const toBeCreatedCards = req.body[0].toBeCreatedCards;
+  if (!req.body) return res.status(400).json({ error: "Invalid request body" });
+  const data = req.body;
+  const cardsToBeCreated = data.map((i) => ({ ...i, user: req.user.id }));
   try {
-    const result = await Card.insertMany(toBeCreatedCards);
+    const result = await Card.insertMany(cardsToBeCreated);
     if (!result)
       return res.status(404).json({ error: "Unable to create cards." });
     res.status(201).json(result);
