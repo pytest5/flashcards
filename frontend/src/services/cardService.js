@@ -1,10 +1,8 @@
 const BASE_URL = "/api/cards";
 
-const HEADERS = () => {
-  return {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${JSON.parse(localStorage.getItem("jwt"))}`,
-  };
+const HEADERS = {
+  "Content-Type": "application/json",
+  Authorization: `Bearer ${JSON.parse(localStorage.getItem("jwt"))}`,
 };
 
 async function getCards() {
@@ -25,7 +23,7 @@ export const getCardsByDeckId = async (deckId) => {
   const appendQuery = `?decks=${deckId}`;
   try {
     const response = await fetch(BASE_URL + appendQuery, {
-      headers: HEADERS(),
+      headers: HEADERS,
     });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
@@ -45,7 +43,7 @@ export const createCard = async (formData) => {
     const response = await fetch(BASE_URL, {
       method: "POST",
       body: JSON.stringify(payload),
-      headers: HEADERS(),
+      headers: HEADERS,
     });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
