@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { loadDeck, editDeck } from "../../services/deckService";
-import { getCardsByDeckId } from "../../services/cardService";
+import { getCardsByDeckId, editCard, deleteCard } from "../../services/cardService";
 import { getAllSubjects } from "../../services/subjectService";
 
 import styles from "./EditDeckPage.module.css";
@@ -37,15 +37,45 @@ export default function EditDeckPage() {
     onLoad();
   }, [deckId]);
 
-  console.log(data);
+  // console.log(data);
 
   const { deck, cards, subjects } = data;
 
   const navigate = useNavigate();
 
   const onSubmit = async (formData) => {
-    editDeck(deck._id, formData);
-    navigate("/home/dashboard");
+    const cardIds = [];
+    for (const card of cards){
+      cardIds.push(card._id);
+    }
+
+    const editedIds = [];
+    for (const card of formData.cards){
+      editedIds.push(card.id);
+    }
+
+    const deletedIds = cardIds.filter(id => !editedIds.includes(id));
+    if (deletedIds){
+      for (const id of deletedIds){
+        deleteCard(id);
+      }
+    }
+
+    // for (const card of formData.cards){
+    //   card.distractors = [];
+    //   for (const key in card){
+    //     if (
+    //       key === "distractor0" ||
+    //       key === "distractor1" ||
+    //       key === "distractor2"
+    //     ) {
+    //       card.distractors.push(card[key].trim());
+    //     }
+    //   }
+    //   editCard(card.id, card);
+    // }
+    // editDeck(deck._id, formData);
+    // navigate("/home/dashboard");
   };
 
   const upperCaseFirstChar = (str) => {
@@ -125,11 +155,16 @@ export default function EditDeckPage() {
           ></input>
         </div>
 
-        {/* {fields?.map((field, index) => (
+        {fields?.map((field, index) => (
           <div key={field._id}>
             <div className={styles.formControl}>
-              <input hidden name="_id" defaultValue={field._id} {...register(`cards.${index}._id`)} />
               <h4>Card {index + 1}</h4>
+              <label hidden>Id</label>
+              <input hidden
+                value={field._id}
+                {...register(`cards.${index}.id`)}
+              />
+              <label>Answer</label>
               <label>Prompt</label>
               <input
                 defaultValue={field.front || ""}
@@ -162,7 +197,7 @@ export default function EditDeckPage() {
               Delete
             </button>
           </div>
-        ))} */}
+        ))}
 
         {/* <button
           type="button"
