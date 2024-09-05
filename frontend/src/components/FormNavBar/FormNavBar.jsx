@@ -3,9 +3,9 @@ import styles from "./FormNavBar.module.css";
 import CloseIcon from "../CloseIcon/CloseIcon";
 import { toDate } from "date-fns/toDate";
 
-export default function FormNavBar({ to }) {
+export default function FormNavBar({ to, ...props }) {
   return (
-    <nav>
+    <nav {...props}>
       <div className={styles.formNavBar}>
         <CloseIcon to={to} />
       </div>

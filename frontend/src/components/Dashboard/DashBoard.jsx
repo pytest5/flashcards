@@ -28,7 +28,11 @@ export default function Dashboard() {
       <h2>Your Decks</h2>
       <GridList aria-label="My Decks" className={styles.dashboardListWrapper}>
         {decks.map((deck) => (
-          <GridListItem key={deck._id} textValue={deck.deckName}>
+          <GridListItem
+            key={deck._id}
+            textValue={deck.deckName}
+            className={styles.dashboardContent}
+          >
             <div className={styles.dashboardItemWrapper}>
               <Link
                 to={`/decks/${deck._id}/session`}
