@@ -32,7 +32,6 @@ export default function StudyNavBar({ step, length, resetProgress }) {
         )}
 
         <BsThreeDots
-          style={{ display: "none" }}
           onClick={() => navigate("../edit", { relative: "path" })}
           color={"var(--dark-variation)"}
         />
