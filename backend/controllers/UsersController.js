@@ -193,6 +193,16 @@ const login = async (req, res) => {
   }
 };
 
+const logout = async (req, res) => {
+  try {
+  res.clearCookie("jwt");
+  localStorage.removeItem("jwt");
+  res.status(200).json({ message: "logged out" });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+}
+
 module.exports = {
   getCurrentUser,
   create,
@@ -201,4 +211,5 @@ module.exports = {
   destroy,
   update,
   login,
+  logout,
 };
