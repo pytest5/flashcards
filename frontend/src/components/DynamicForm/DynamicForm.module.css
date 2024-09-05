@@ -66,5 +66,7 @@
 }
 
 .dynamicSection {
-  border: 1px solid red;
+  border: 1px solid var(--light-variation);
+  border-radius: 8px;
+  padding: var(--spacing-4);
 }
