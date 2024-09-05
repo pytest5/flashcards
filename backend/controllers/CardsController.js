@@ -152,7 +152,7 @@ async function destroyMany(req, res) {
 }
 
 async function createMany(req, res) {
-  const toBeCreatedCards = req.body.toBeCreatedCards;
+  const toBeCreatedCards = req.body[0].toBeCreatedCards;
   try {
     const result = await Card.insertMany(toBeCreatedCards);
     if (!result)

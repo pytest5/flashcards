@@ -16,11 +16,13 @@ import StagingArea from "./components/StagingArea/StagingArea";
 import HomeContent from "./components/HomeContent/HomeContent";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import JoshStagingArea from "./components/Temp/JoshStaging";
+import DynamicForm from "./components/DynamicForm/DynamicForm";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} /> {/* styled */}
+      <Route path="/test" element={<DynamicForm />} /> {/* styled */}
       <Route path="/signup" element={<SignUpPage />} /> {/* styled */}
       <Route path="/login" element={<LoginPage />} /> {/* styled */}
       {/* styled */}
