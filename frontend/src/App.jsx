@@ -22,10 +22,8 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} /> {/* styled */}
-      <Route path="/test" element={<DynamicForm />} /> {/* styled */}
       <Route path="/signup" element={<SignUpPage />} /> {/* styled */}
       <Route path="/login" element={<LoginPage />} /> {/* styled */}
-      {/* styled */}
       <Route path="/home" element={<HomeLayout />}>
         <Route index element={<HomeContent />} /> {/* styled */}
         <Route path="dashboard" element={<DashBoard />} />
@@ -40,7 +38,7 @@ function App() {
         <Route path="summary" element={<Summary />} /> {/* styled */}
       </Route>
       <Route path="/decks/new" element={<CreateDeckPage />} />
-      <Route path="/decks/:deckId/edit" element={<EditDeckForm />} />
+      <Route path="/decks/:deckId/edit" element={<DynamicForm />} />
       <Route path="/decks/:deckId/new" element={<CreateCardsPage />} />
       <Route path="josh/staging" element={<JoshStagingArea />} />
     </Routes>
