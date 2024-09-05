@@ -105,17 +105,31 @@ export const deleteManyCards = async (formData) => {
   }
 };
 
-export const updateManyCards = async (formData) => {
+export const updateManyCards = async (formData, deckId) => {
+  function transformData(data) {
+    return data.map((i) => {
+      const { prompt: front, ...rest } = i;
+      return {
+        front,
+        ...rest,
+        isMultipleChoice: true,
+        isChildFriendly: true,
+        decks: [deckId],
+      };
+    });
+  }
   try {
     const response = await fetch(`${BASE_URL}`, {
       method: "PUT",
-      body: JSON.stringify(formData),
+      body: JSON.stringify(transformData(formData)),
       headers: HEADERS,
     });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
     const json = await response.json();
+
+    console.log("GG", json);
     console.log(json);
     return json;
   } catch (error) {
