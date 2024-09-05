@@ -42,11 +42,12 @@ export default function CreateCardsPage() {
       card.decks = [deck._id];
       card.user = deck.user;
     }
-
-    const cardsCreated = createCard(cards);
-    if (cardsCreated) {
-      navigate("/home");
-    }
+    console.log(cards)
+    const cardsCreated = await createCard(cards);
+    console.log(cardsCreated);
+    // if (cardsCreated) {
+    //   navigate("/home");
+    // }
   };
 
   if (type === "front-back") {
