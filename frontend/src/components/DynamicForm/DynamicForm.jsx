@@ -9,6 +9,8 @@ import {
 } from "../../services/cardService";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "./DynamicForm.module.css";
+import { IoCloseOutline } from "react-icons/io5";
+import CloseIcon from "../CloseIcon/CloseIcon";
 
 export default function DynamicForm() {
   const navigate = useNavigate();
@@ -89,11 +91,27 @@ export default function DynamicForm() {
         {fields.map((i, idx) => {
           return (
             <section key={i.id} className={styles.dynamicSection}>
+              <button
+                className={styles.dynamicFormButton}
+                type="button"
+                onClick={() => {
+                  remove(idx);
+                  setToBeDeleted([...toBeDeleted, i._id]);
+                  setToBeEdited(toBeEdited.filter((item) => item !== i._id));
+                }}
+              >
+                <IoCloseOutline size={20} style={{ border: "none" }} />
+              </button>
               {/* 0. ID */}
-              <input type="hidden" {...register(`cards.${idx}._id`)} />
+              <input
+                className={styles.formInput}
+                type="hidden"
+                {...register(`cards.${idx}._id`)}
+              />
               {/* 1. PROMPT */}
               <label>prompt</label>
               <input
+                className={styles.formInput}
                 {...register(`cards.${idx}.prompt`, {
                   //   required: "prompt required",
                 })}
@@ -103,6 +121,7 @@ export default function DynamicForm() {
               {/* 2. ANSWER */}
               <label>answer</label>
               <input
+                className={styles.formInput}
                 {...register(`cards.${idx}.answer`, {
                   required: "answer required",
                 })}
@@ -110,10 +129,11 @@ export default function DynamicForm() {
               />
               <p>{errors.answer?.message}</p>
               {/* 3. DISTRACTORS */}
-              <label>Distractors</label>
+              <label>distractors</label>
               {i?.distractors?.map((distractor, index) => (
                 <div key={index}>
                   <input
+                    className={styles.formInput}
                     {...register(`cards.${idx}.distractors.${index}`, {
                       //   required: "Distractor is required",
                     })}
@@ -123,33 +143,30 @@ export default function DynamicForm() {
                 </div>
               ))}
               {/* 4. ISCHILDFRIENDLY */}
-              <label>Is Child Friendly</label>
-              <select {...register(`cards.${idx}.isChildFriendly`)}>
+              <label>is child friendly</label>
+              <select
+                className={styles.formInput}
+                {...register(`cards.${idx}.isChildFriendly`)}
+              >
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
               </select>
               <p>{errors.cards?.[idx]?.isChildFriendly?.message}</p>
               {/* 5. ISPUBLIC */}
-              <label>Is Public</label>
-              <select {...register(`cards.${idx}.isPublic`)}>
+              <label>is public</label>
+              <select
+                className={styles.formInput}
+                {...register(`cards.${idx}.isPublic`)}
+              >
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
               </select>
               <p>{errors.cards?.[idx]?.isPublic?.message}</p>
-              <button
-                type="button"
-                onClick={() => {
-                  remove(idx);
-                  setToBeDeleted([...toBeDeleted, i._id]);
-                  setToBeEdited(toBeEdited.filter((item) => item !== i._id));
-                }}
-              >
-                Delete
-              </button>
             </section>
           );
         })}
         <button
+          className={`${styles.secondary} ${styles.button}`}
           type="button"
           onClick={() =>
             append({
@@ -159,11 +176,12 @@ export default function DynamicForm() {
             })
           }
         >
-          Append
+          Add card
         </button>
-        <p>{errors.cards?.root?.message}</p>
-        <input type="submit" className={styles.formSubmitButton} />
+        {/* <p>{errors.cards?.root?.message}</p> */}
+        <input type="submit" className={styles.button} />
       </form>
     </FormContainer>
   );
 }
+IoCloseOutline;

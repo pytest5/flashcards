@@ -40,3 +40,11 @@
 .warning {
   background-color: var(--bright-warning-variation);
 }
+
+@media (min-width: 1024px) {
+  .button {
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+}

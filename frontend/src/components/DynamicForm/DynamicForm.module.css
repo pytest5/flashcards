@@ -1,4 +1,4 @@
-.formSubmitButton {
+.button {
   color: var(--white);
   background: var(--button-bg-color);
   border: 1px solid var(--light-variation);
@@ -44,14 +44,16 @@
     align-self: start;
     font-weight: var(--font-weight-2);
   }
-  & input {
-    border-radius: var(--input-border-radius);
-    border-color: var(--input-border-color);
-    border-width: 1.5px;
-    padding: 6px 10px;
-    font-size: 0.9rem;
-  }
   gap: var(--spacing-2);
+}
+
+.formInput {
+  border-radius: var(--input-border-radius);
+  border-color: var(--input-border-color);
+  border-width: 1.5px;
+  padding: 6px 10px;
+  font-size: 0.9rem;
+  width: 100%;
 }
 
 .createFormSelect {
@@ -60,13 +62,40 @@
   border-radius: var(--border-radius-2);
 }
 
-.formControl input[name="deckName"],
+/* .formControl input[name="deckName"],
 .formControl input[name="description"] {
-  border: 1px solid var(--light-variation);
-}
+  border: 1px solid var(----dark-variation-variation);
+} */
 
 .dynamicSection {
-  border: 1px solid var(--light-variation);
+  border: 1px solid var(--medium-variation);
   border-radius: 8px;
-  padding: var(--spacing-4);
+  padding: var(--spacing-2) var(--spacing-3) var(--spacing-3);
+  display: flex;
+  flex-direction: column;
+  & label {
+    align-self: start;
+    margin: var(--spacing-4) 0 var(--spacing-2);
+  }
+  & input,
+  select {
+    border: 1px solid var(--light-variation);
+  }
+  /* gap: var(--spacing-3); */
+}
+
+.dynamicFormButton {
+  border: none;
+  background: none;
+  align-self: end;
+}
+
+.secondary {
+  background-color: var(--light-variation);
+  color: var(--darkest-variation);
+  border: 1px solid var(----lightest-variation-variation);
+  margin-bottom: -16px;
+}
+.dynamicFormLabel {
+  align-self: start;
 }

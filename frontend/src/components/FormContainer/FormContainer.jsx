@@ -4,8 +4,13 @@ import FormNavBar from "../FormNavBar/FormNavBar";
 export default function FormContainer({ header, children, to, ...props }) {
   return (
     <div className={styles.formContainer} {...props}>
-      <FormNavBar to={to} />
-      <h1 className={styles.formHeader}>{header}</h1>
+      <FormNavBar to={to} style={{ position: "sticky", top: 0, zIndex: 1 }} />
+      <h1
+        className={styles.formHeader}
+        style={{ position: "sticky", top: 0, background: "white" }}
+      >
+        {header}
+      </h1>
       {children}
     </div>
   );

@@ -27,7 +27,7 @@ export default function HomeContent() {
           <h3>Trending Decks</h3>
           <Link className={styles.viewMore}>View more</Link>
         </div>
-        <div>X Y Z</div>
+        <div style={{ color: "var(--medium-variation)" }}>Coming soon!</div>
       </section>
       <div className={styles.homeContentSession}>
         <div className={styles.homeContentHeader}>

@@ -99,7 +99,7 @@ export default function CreateDeckPage() {
         <input
           className={styles.formSubmitButton}
           type="submit"
-          value="Create Deck (Tick / Submit)"
+          value="Create Deck"
         />
       </form>
     </FormContainer>
