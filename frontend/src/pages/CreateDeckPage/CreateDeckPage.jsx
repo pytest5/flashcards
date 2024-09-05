@@ -33,7 +33,7 @@ export default function CreateDeckPage() {
     const deck = await createDeck(formData);
     if (deck) {
       deck.type = formData.type;
-      navigate(`/decks/${deck._id}/new`, { state: { deck } });
+      navigate(`/decks/${deck._id}/edit`, { state: { deck } });
     }
   };
 

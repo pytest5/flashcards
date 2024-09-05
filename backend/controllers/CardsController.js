@@ -39,9 +39,10 @@ async function getAll(req, res) {
 }
 
 async function create(req, res) {
-  if (!req.body) res.status(400).json({ error: "Invalid request body" });
-  if (!req.body.deckId)
-    res
+  console.log(req.body)
+  if (!req.body) return res.status(400).json({ error: "Invalid request body" });
+  if (!req.body.decks)
+    return res
       .status(400)
       .json({ error: "Please provide a deckId when creating card" });
   try {
