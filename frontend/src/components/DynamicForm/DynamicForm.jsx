@@ -62,7 +62,7 @@ export default function DynamicForm() {
     control,
     name: "cards",
     rules: {
-      required: "Please append at least 1 item",
+      required: "Please add at least 1 card",
     },
   });
 
@@ -83,7 +83,7 @@ export default function DynamicForm() {
   };
   //   console.log("cards", cards);
   //   console.log("FIELDS", fields);
-  //   console.log("error object:", errors);
+  console.log("error object:", errors);
 
   return (
     <FormContainer header="Editing deck" to="/home" style={{ height: "100%" }}>
@@ -127,7 +127,14 @@ export default function DynamicForm() {
                 })}
                 placeholder="some placeholder"
               />
-              <p>{errors.answer?.message}</p>
+              <p
+                style={{
+                  color: "var(--warning-variation)",
+                  textAlign: "start",
+                }}
+              >
+                {errors.cards?.[idx]?.answer?.message}
+              </p>
               {/* 3. DISTRACTORS */}
               <label>distractors</label>
               {i?.distractors?.map((distractor, index) => (
@@ -135,11 +142,18 @@ export default function DynamicForm() {
                   <input
                     className={styles.formInput}
                     {...register(`cards.${idx}.distractors.${index}`, {
-                      //   required: "Distractor is required",
+                      required: "Distractor is required",
                     })}
                     placeholder="distractor"
                   />
-                  <p>{errors.cards?.[idx]?.distractors?.[index]?.message}</p>
+                  <p
+                    style={{
+                      color: "var(--warning-variation)",
+                      textAlign: "start",
+                    }}
+                  >
+                    {errors.cards?.[idx]?.distractors?.[index]?.message}
+                  </p>
                 </div>
               ))}
               {/* 4. ISCHILDFRIENDLY */}
@@ -165,6 +179,14 @@ export default function DynamicForm() {
             </section>
           );
         })}
+        <p
+          style={{
+            color: "var(--warning-variation)",
+            textAlign: "start",
+          }}
+        >
+          {errors.cards?.root?.message}
+        </p>
         <button
           className={`${styles.secondary} ${styles.button}`}
           type="button"
@@ -178,7 +200,6 @@ export default function DynamicForm() {
         >
           Add card
         </button>
-        {/* <p>{errors.cards?.root?.message}</p> */}
         <input type="submit" className={styles.button} />
       </form>
     </FormContainer>
