@@ -41,10 +41,12 @@
 }
 
 .welcomeHeader {
-  margin-top: var(--spacing-2);
+  margin-top: 0px;
 }
 
 .welcomeMsg {
-  margin-top: var(--spacing-3);
-  margin-bottom: var(--spacing-5);
+  margin-top: var(--spacing-5);
+  margin-bottom: var(--spacing-6);
+  width: 30ch;
+  align-self: center;
 }
