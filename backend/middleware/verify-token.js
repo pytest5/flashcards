@@ -15,4 +15,16 @@ function verifyToken(req, res, next) {
   }
 }
 
-module.exports = { verifyToken, getUser };
+async function verifyUserDeck(req, res) {
+  try {
+    const decks = await Deck.find({ user: req.user.id });
+    req.decks = decks;
+    next();
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({
+      error: `An error occurred while finding decks for user ID: ${req.user.id}`,
+    });
+  }
+}
+module.exports = { verifyToken, getUser, verifyUserDeck };

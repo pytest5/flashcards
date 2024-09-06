@@ -14,7 +14,7 @@ export default function LoginPage({ setToken }) {
 
   const onSubmit = async (formData) => {
     const token = await login(formData);
-    setToken(token);
+    // setToken(token);
     if (token) {
       navigate("/home");
     }
